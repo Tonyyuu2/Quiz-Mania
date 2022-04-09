@@ -14,7 +14,14 @@
 </head>
 
 <body>
-  <h1>Have fun! 🥔</h1>
+  <div class="quiz_my_quizzes">
+    <% for(const quiz of quizzes) { %>
+    <div class="quiz_card">
+      <h3><%=quiz.description%></h3>
+      <a class="quiz_url" href="/quizzes/u/<%=quiz.url%>"><%=quiz.url%></a>
+    </div>
+    <% } %>
+  </div>
 </body>
 
 </html>
