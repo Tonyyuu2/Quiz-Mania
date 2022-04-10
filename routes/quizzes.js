@@ -6,7 +6,9 @@
  */
 
 const express = require('express');
-const router  = express.Router();
+const router = express.Router();
+const bodyParser = require('body-parser');
+router.use(bodyParser.urlencoded({ extended: true }));
 
 const generateRandomString = () => {
   return Math.random().toString(36).slice(-6);
@@ -15,12 +17,11 @@ const generateRandomString = () => {
 module.exports = (db) => {
   //quizzes/:id
   router.get("/:id", (req, res) => {
-
   });
 
   //quizzes/u/:id
   router.get("/u/:id", (req, res) => {
-    
+
   });
 
   //quizzes/add
@@ -30,8 +31,17 @@ module.exports = (db) => {
   });
 
   router.post("/add", (req, res) => {
-     //redirects user to page where user adds questions with the quiz with the quizID AFTER USER CLICKS CREATE A Qd to make the page that directs the user to the create a quUIZ
+
+    const { quiz_title, quiz_description, is_public } = req.body;
+    const quizID = generateRandomString();
+    console.log(quizID);
+    db.query(`INSERT INTO quizzes (user_id, public, description, url) VALUES ($1, $2, $3, $4) RETURNING *`, [1, is_public, quiz_description, quizID]).then(result => {
       //neeiz page
+    }).catch(err => {
+      res.status(500).json({ error: err.message });
+    });
+    res.redirect("/questions/add"); //redirects user to page where user adds questions with the quiz with the quizID AFTER USER CLICKS CREATE A Qd to make the page that directs the user to the create a quUIZ
+
   });
 
   return router;
