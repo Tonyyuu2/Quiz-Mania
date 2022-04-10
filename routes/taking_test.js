@@ -8,7 +8,7 @@ module.exports = (db) => {
   });
 
   router.post("/"), (req, res) => {
-   
+
   }; // records the user's results and redirects them to a congratulations page
   return router;
 };
