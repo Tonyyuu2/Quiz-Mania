@@ -3,10 +3,12 @@ body {
   flex-direction: column;
   min-height: 100vh;
   font-family: "DM Sans", sans-serif;
+  background-color: #f9fafb;
 }
 
 a {
   text-decoration: none;
+  line-height: 1.5rem;
 }
 
 .text-center {

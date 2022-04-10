@@ -58,8 +58,7 @@ app.get("/", (req, res) => {
   db.query(`SELECT * FROM quizzes`).then(result => {
     console.log({ quizzes: result.rows});
     //const templateVars = result.rows[0];
-    res.render("index", { quizzes: result.rows }); //switch back to index before push
-
+    res.render("display_question", { quizzes: result.rows });
   });
 });
 
