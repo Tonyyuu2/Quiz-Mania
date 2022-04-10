@@ -17,21 +17,11 @@ const generateRandomString = () => {
 module.exports = (db) => {
   //quizzes/:id
   router.get("/:id", (req, res) => {
-    db.query(`SELECT * FROM quizzes WHERE quizzes.id = $1;`, [req.params.id]).then(result => {
-      res.render("quizzes/:id", result.rows[0]); //render the appropriate quiz given the quiz id
-    })
-      .catch(err => {
-        res.status(500).json({ error: err.message });
-      });
   });
 
   //quizzes/u/:id
   router.get("/u/:id", (req, res) => {
-    db.query(`SELECT * FROM quizzes WHERE quizzes.url LIKE $1`, ['%' + req.params.id]).then(result => {
-      res.render("quizzes/u/:id", result.rows[0]);
-    }).catch(err => {
-      res.status(500).json({ error: err.message });
-    });
+
   });
 
   //quizzes/add
@@ -41,6 +31,7 @@ module.exports = (db) => {
   });
 
   router.post("/add", (req, res) => {
+
     const { quiz_title, quiz_description, is_public } = req.body;
     const quizID = generateRandomString();
     console.log(quizID);
@@ -50,6 +41,7 @@ module.exports = (db) => {
       res.status(500).json({ error: err.message });
     });
     res.redirect("/questions/add"); //redirects user to page where user adds questions with the quiz with the quizID AFTER USER CLICKS CREATE A Qd to make the page that directs the user to the create a quUIZ
+
   });
 
   return router;

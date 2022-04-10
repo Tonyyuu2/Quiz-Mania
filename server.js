@@ -56,9 +56,9 @@ app.use("/taking_tests", takingTests(db));
 
 app.get("/", (req, res) => {
   db.query(`SELECT * FROM quizzes`).then(result => {
-    console.log({ quizzes: result.rows });
+    console.log({ quizzes: result.rows});
     //const templateVars = result.rows[0];
-    res.render("create_quiz", { quizzes: result.rows });
+    res.render("home", { quizzes: result.rows });
   });
 });
 
