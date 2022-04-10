@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Questions List</title>
+
+  <!-- style -->
+  <link rel="stylesheet" href="/styles/questions.css" type="text/css" />
+
+<head>
+
+
+  <body>
+    <%- include('partials/_header') %>
+    <div class="main-container">
+      <div class="answers">
+        <h1>Add a Question!</h1>
+
+          <div class="questions-container">
+
+            <div class="write-question">
+            <input id="question" type="text" name="first-question" placeholder="Write Question">
+          </div>
+
+            <div id="answers" class="answer-buttons">
+
+              <input class="answer" type="text" name="answer1" placeholder="First Answer">
+
+              <input class="answer" type="text" name="answer2" placeholder="Second Answer">
+
+              <input class="answer" type="text" name="answer3" placeholder="Third Answer">
+
+              <input class="answer" type="text" name="answer4" placeholder="Fourth Answer">
+              <br>
+            </div>
+            <div class="correctanswer">
+              <input class="full-width" type="text" name="correct-answer" placeholder="Correct Answer">
+            </div>
+          </div>
+          <div class="submission">
+            <button class="submitbutton" type="submit">Add another Question!</button>
+            <button class="submitbutton" type="submit">Submit Quiz</button>
+          </div>
+        </form>
+      </div>
+    </div>
+
+
+    <%- include('partials/_footer') %>
+  </body>

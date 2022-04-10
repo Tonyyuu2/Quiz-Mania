@@ -1,4 +1,6 @@
 body {
+  display: flex;
+  flex-direction: column;
   min-height: 100vh;
 
   background: rgb(163, 208, 219);
