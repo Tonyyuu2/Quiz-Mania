@@ -8,6 +8,8 @@
 const express = require('express');
 const router  = express.Router();
 
+const { getAllQuizzes, getQuizFromUserURL, addQuiz} = require("../db/database_helper_functions");
+
 const generateRandomString = () => {
   return Math.random().toString(36).slice(-6);
 };
@@ -16,11 +18,12 @@ module.exports = (db) => {
   //quizzes/:id
   router.get("/:id", (req, res) => {
 
-  });
+    })
+
 
   //quizzes/u/:id
   router.get("/u/:id", (req, res) => {
-    
+
   });
 
   //quizzes/add
@@ -30,8 +33,8 @@ module.exports = (db) => {
   });
 
   router.post("/add", (req, res) => {
-     //redirects user to page where user adds questions with the quiz with the quizID AFTER USER CLICKS CREATE A Qd to make the page that directs the user to the create a quUIZ
-      //neeiz page
+    const result = addQuiz(db);
+    res.redirect("/question/add", result) //redirect happens here
   });
 
   return router;

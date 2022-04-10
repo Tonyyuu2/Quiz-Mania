@@ -1,9 +1,6 @@
 const { Pool } = require("pg");
-const dbParams = require("./lib/db.js");
-const db = new Pool(dbParams);
-db.connect();
 
-const getAllQuizzes = (id) => {
+const getAllQuizzes = (db ,id) => {
 
   return  db.query(`SELECT * FROM quizzes WHERE quizzes.id = $1;`, [id]).then(result => {
    return (result.rows[0]) //render the appropriate quiz given the quiz id
@@ -14,7 +11,7 @@ const getAllQuizzes = (id) => {
 }
 exports.getAllQuizzes = getAllQuizzes;
 
-const getQuizFromUserURL = (url) => {
+const getQuizFromUserURL = (db, url) => {
 
   return db.query(`SELECT * FROM quizzes WHERE quizzes.url LIKE $1`, ['%'+ url]).then(result => {
     return (result.rows[0])
@@ -25,10 +22,12 @@ const getQuizFromUserURL = (url) => {
 }
 exports.getQuizFromUserURL = getQuizFromUserURL;
 
-const addQuiz = () => {
+const addQuiz = (db) => {
 
+  const { quiz_title, quiz_description, is_public } = req.body;
   const quizID = generateRandomString();
-  return db.query(`INSERT INTO quizzes (user_id, public, description, url) VALUES ($1, $2, $3, $4) RETURNING *`, [req.body.user_id, req.body.public, req.body.description, quizID]).then(result => {
+
+  return db.query(`INSERT INTO quizzes (user_id, public, description, url) VALUES ($1, $2, $3, $4) RETURNING *`, [1, is_public, quiz_description, quizID]).then(result => {
     return (result.rows[0].quizID)
   })
   .catch(err => {
@@ -37,7 +36,10 @@ const addQuiz = () => {
 };
 exports.addQuiz = addQuiz;
 
-const addQuestion = () => {
+//   res.redirect("/questions/add"); //redirects user to page where user adds questions with the quiz with the quizID AFTER USER CLICKS CREATE A Qd to make the page that directs the user to the create a quUIZ
+// });
+
+const addQuestion = (db) => {
 
   return db.query(`INSERT INTO questions (quiz_id, question_desc) VALUES ($1, $2) RETURNING *`, [req.body.quiz_id, req.body.question_desc]).then(result => {
 
@@ -51,7 +53,7 @@ const addQuestion = () => {
 };
 exports.addQuestion = addQuestion;
 
-const getAllResults = (id) => {
+const getAllResults = (db, id) => {
 
   return db.query(`SELECT * FROM quiz_results JOIN users ON users.id = user_id JOIN quizzes ON quizzes.id = quiz_id WHERE quiz_results.id = $1`, [id]).then(result => {
     return (result.rows[0])
@@ -61,7 +63,7 @@ const getAllResults = (id) => {
 };
 exports.getAllResults = getAllResults;
 
-const getMyAttempts = (id) => {
+const getMyAttempts = (db, id) => {
 
   return db.query(`SELECT * FROM quiz_results JOIN quizzes ON quizzes.id = quiz_id JOIN users ON users.id = quiz_results.user_id WHERE users.id = $1`, [id]).then(result => {
     return (result.rows) //
@@ -71,7 +73,7 @@ const getMyAttempts = (id) => {
 };
 exports.getMyAttempts = getMyAttempts;
 
-const addTestResult = () => {
+const addTestResult = (db) => {
 
   return db.query(`INSERT INTO quiz_results (user_id, quiz_id, user_score, total_score, date, result_url) VALUES ($1, $2, $3, $4, $5, $6) RETURNING *`, [req.body.user_id, req.body.quiz_id, req.body.user_score, req.body.total_score, req.body.date, req.body.result_url]).then(result => {
     return(res.rows[0].user_id)
