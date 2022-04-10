@@ -43,11 +43,11 @@ const takingTests = require("./routes/taking_test");
 
 // Mount all resource routes
 // Note: Feel free to replace the example routes below with your own
-app.use("/api/quizzes", quizzesRoutes(db));
-app.use("/api/questions", questionsRoutes(db));
-app.use("/api/results", resultsRoutes(db));
-app.use("/api/my_attempts", myAttempts(db));
-app.use("/api/taking_tests", takingTests(db));
+app.use("/quizzes", quizzesRoutes(db));
+app.use("/questions", questionsRoutes(db));
+app.use("/results", resultsRoutes(db));
+app.use("/my_attempts", myAttempts(db));
+app.use("/taking_tests", takingTests(db));
 // Note: mount other resources here, using the same pattern above
 
 // Home page

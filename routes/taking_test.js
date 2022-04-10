@@ -4,7 +4,7 @@ const router = express.Router();
 module.exports = (db) => {
   // /taking_tests
   router.get("/", (req, res) => {
-    res.redirect(""); //takes user to form to answer quiz questions
+    res.render(""); //takes user to form to answer quiz questions
   });
 
   router.post("/"), (req, res) => {

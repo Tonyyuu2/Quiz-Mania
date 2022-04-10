@@ -16,7 +16,7 @@ module.exports = (db) => {
   //quizzes/:id
   router.get("/:id", (req, res) => {
     db.query(`SELECT * FROM quizzes WHERE quizzes.id = $1;`, [req.params.id]).then(result => {
-      res.render("/quizzes/:id", result.rows[0]) //render the appropriate quiz given the quiz id
+      res.render("quizzes/:id", result.rows[0]) //render the appropriate quiz given the quiz id
       })
       .catch(err => {
         res.status(500).json({error: err.message });
@@ -41,8 +41,8 @@ module.exports = (db) => {
   router.post("/add", (req, res) => {
     const quizID = generateRandomString()
     db.query(`INSERT INTO quizzes (user_id, public, description, url) VALUES ($1, $2, $3, $4) RETURNING *`, [req.body.user_id, req.body.public, req.body.description, quizID]).then(result => {
-      res.redirect("/need_to_make", result.rows[0].quizID) //redirects user to page where user adds questions with the quiz with the quizID AFTER USER CLICKS CREATE A QUIZ
-      //need to make the page that directs the user to the create a quiz page 
+      res.redirect("/need_to_make", result.rows[0].quizID) //redirects user to page where user adds questions with the quiz with the quizID AFTER USER CLICKS CREATE A Qd to make the page that directs the user to the create a quUIZ
+      //neeiz page
     }).catch(err => {
       res.status(500).json({error: err.message});
     })
