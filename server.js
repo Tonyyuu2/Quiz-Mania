@@ -58,7 +58,7 @@ app.get("/", (req, res) => {
   db.query(`SELECT * FROM quizzes`).then(result => {
     console.log({ quizzes: result.rows });
     //const templateVars = result.rows[0];
-    res.render("add_questions", { quizzes: result.rows });
+    res.render("create_quiz", { quizzes: result.rows });
   });
 });
 
