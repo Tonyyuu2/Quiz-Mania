@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <title>Home Page</title>
+    <title>Create - a quiz</title>
 
     <link rel="stylesheet" href="/vendor/normalize-4.1.1.css" type="text/css" />
     <link rel="stylesheet" href="/vendor/border-box.css" type="text/css" />
@@ -18,29 +18,15 @@
   </head>
 
   <body>
-
-    <%- include('partials/_header') %>
-    <div class="user_name">Welcome John</div>
+    <div class="user_name">Create New Quiz</div>
     <div class="quiz">
       <Section class="quiz_my_quizzes">
-        <p class="quiz_header">My quizzes</p>
-        <% for(const quiz of quizzes) { %>
         <div class="quiz_card text-center">
-          <h4><%=quiz.description%></h4>
-          <a class="primary-btn" href="/quizzes/u/<%=quiz.url%>">Attempt</a>
+          <h4>Do you want to create a Quiz?</h4>
+          <a class="primary-btn" href="/quizzes/add">Create</a>
+          <a class="primary-btn" href="/">Cancel</a>
         </div>
-        <% } %>
-      </Section>
-      <Section class="quiz_featured_quizzes">
-        <p class="quiz_header">Featured quizzes</p>
-        <% for(const quiz of quizzes) { %>
-        <div class="quiz_card text-center">
-          <h4><%=quiz.description%></h4>
-          <a class="primary-btn" href="/quizzes/u/<%=quiz.url%>">Attempt</a>
-        </div>
-        <% } %>
       </Section>
     </div>
-    <%- include('partials/_footer') %>
   </body>
 </html>
