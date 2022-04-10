@@ -34,3 +34,17 @@ a {
 .flex-row {
   display: flex;
 }
+
+.create_quiz_container {
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+  margin: 2rem auto;
+  padding: 4rem 0;
+  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+  border-radius: 1rem;
+  width: 40%;
+  .visibility_option input {
+    margin: 0 6px;
+  }
+}

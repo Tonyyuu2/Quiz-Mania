@@ -1,3 +1,4 @@
+
 const express = require('express');
 const router = express.Router();
 
@@ -12,3 +13,4 @@ module.exports = (db) => {
   }; // records the user's results and redirects them to a congratulations page
   return router;
 };
+
