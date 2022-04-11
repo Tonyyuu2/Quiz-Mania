@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>QuizMania - Add Question</title>
+
+
+  <head>
+  <link rel="stylesheet" href="/styles/add_question.css" type="text/css" />
+  </head>
+
+  <body>
+    <%- include('partials/_header') %>
+    <form method="POST" action="/question/add"> 
+    <div class="question_container flex-column nav-margin">
+     
+        <h1>Add a Question!</h1>   
+        <div>     
+            <label>Question: </label>
+            <input id="question" type="text" name="question" placeholder="Add question">
+          </div>
+          <div>
+            <label>Option 1: </label>
+            <input type="text" name="answer1" placeholder="Add option 1">
+          </div>
+          <div>
+            <label>Option 2: </label>
+            <input type="text" name="answer2" placeholder="Add option 2">
+          </div>
+          <div>
+            <label>Option 3: </label>
+            <input type="text" name="answer3" placeholder="Add option 3">
+          </div>
+          <div>
+            <label>Option 4: </label>
+            <input type="text" name="answer4" placeholder="Add option 4">
+          </div>
+          <div>
+            <label>Answer: </label>         
+            <input  type="text" name="correct-answer" placeholder="Correct answer">
+          </div>
+          
+          <form action="/questions/add" method="POST">
+          <div>
+            <button class="primary-btn" type="submit">Add another Question!</button>
+            <button class="primary-btn" type="submit">Done</button>
+          </form>
+          </div>
+        </form>
+      
+    </div>
+
+
+    <%- include('partials/_footer') %>
+  </body>

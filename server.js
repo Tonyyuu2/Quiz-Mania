@@ -24,7 +24,7 @@ app.use(cookieSession({
   name: 'session',
   keys: ['key1', 'key2']
 }));
-app.use(bodyParser.urlencoded({extended: true}));
+app.use(bodyParser.urlencoded({ extended: true }));
 app.set("view engine", "ejs");
 app.use(express.urlencoded({ extended: true }));
 
@@ -62,9 +62,9 @@ app.use("/taking_tests", takingTests(db));
 
 app.get("/", (req, res) => {
   db.query(`SELECT * FROM quizzes`).then(result => {
-    console.log({ quizzes: result.rows});
+    console.log({ quizzes: result.rows });
     //const templateVars = result.rows[0];
-    res.render("home", { quizzes: result.rows });
+    res.render("1_1_home", { quizzes: result.rows });
   });
 });
 
