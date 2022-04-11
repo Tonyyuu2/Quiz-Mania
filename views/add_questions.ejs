@@ -19,7 +19,7 @@
           <div class="questions-container">
 
             <div class="write-question">
-            <input id="question" type="text" name="first-question" placeholder="Write Question">
+            <input id="question" type="text" name="question" placeholder="Write Question">
           </div>
 
             <div id="answers" class="answer-buttons">
@@ -37,9 +37,11 @@
               <input class="full-width" type="text" name="correct-answer" placeholder="Correct Answer">
             </div>
           </div>
+          <form action="/questions/add" method="POST">
           <div class="submission">
             <button class="submitbutton" type="submit">Add another Question!</button>
             <button class="submitbutton" type="submit">Submit Quiz</button>
+          </form>
           </div>
         </form>
       </div>

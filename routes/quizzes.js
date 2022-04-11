@@ -10,38 +10,39 @@ const router = express.Router();
 const bodyParser = require('body-parser');
 router.use(bodyParser.urlencoded({ extended: true }));
 
-const generateRandomString = () => {
-  return Math.random().toString(36).slice(-6);
-};
+const { getQuiz, getQuizFromUserURL, addQuiz} = require("../db/database_helper_functions");
 
 module.exports = (db) => {
+  //quizzes/add
+  router.get("/add", (req, res) => {
+    res.render("add_questions"); //redirects user to page where user creates the quiz (not questions) // change render page
+  });
+
   //quizzes/:id
   router.get("/:id", (req, res) => {
+    getQuiz(db, req.params).then(result => {
+      res.render(" ");
+    }).catch(err => {
+      res.status(500).send("failed")
+    })
   });
 
   //quizzes/u/:id
   router.get("/u/:id", (req, res) => {
-
-  });
-
-  //quizzes/add
-  router.get("/add", (req, res) => {
-    //quizzes/add
-    res.redirect("/add_questions"); //redirects user to page where user creates the quiz (not questions)
+    getQuizFromUserURL(db, req.params).then(result => {
+      res.render(" ");
+    }).catch(err => {
+      res.status(500).send("failed")
+    })
   });
 
   router.post("/add", (req, res) => {
-
-    const { quiz_title, quiz_description, is_public } = req.body;
-    const quizID = generateRandomString();
-    console.log(quizID);
-    db.query(`INSERT INTO quizzes (user_id, public, description, url) VALUES ($1, $2, $3, $4) RETURNING *`, [1, is_public, quiz_description, quizID]).then(result => {
-      //neeiz page
-    }).catch(err => {
-      res.status(500).json({ error: err.message });
-    });
-    res.redirect("/questions/add"); //redirects user to page where user adds questions with the quiz with the quizID AFTER USER CLICKS CREATE A Qd to make the page that directs the user to the create a quUIZ
-
+    addQuiz(db).then(result => {
+      res.redirect("/question/add") //redirect happens here
+    })
+    .catch(err => {
+      res.status(500).send("failed")
+    })
   });
 
   return router;
