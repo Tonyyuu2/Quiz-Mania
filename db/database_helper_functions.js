@@ -1,6 +1,7 @@
+const req = require("express/lib/request");
 const { Pool } = require("pg");
 
-const getAllQuizzes = (db ,id) => {
+const getQuiz = (db ,id) => {
 
   return  db.query(`SELECT * FROM quizzes WHERE quizzes.id = $1;`, [id]).then(result => {
    return (result.rows[0]) //render the appropriate quiz given the quiz id
@@ -9,7 +10,7 @@ const getAllQuizzes = (db ,id) => {
       res.status(500).json({error: err.message });
     });
 }
-exports.getAllQuizzes = getAllQuizzes;
+exports.getQuiz = getQuiz;
 
 const getQuizFromUserURL = (db, url) => {
 
@@ -21,6 +22,10 @@ const getQuizFromUserURL = (db, url) => {
   });
 }
 exports.getQuizFromUserURL = getQuizFromUserURL;
+
+const generateRandomString = () => {
+  return Math.random().toString(36).slice(-6);
+};
 
 const addQuiz = (db) => {
 
@@ -36,14 +41,15 @@ const addQuiz = (db) => {
 };
 exports.addQuiz = addQuiz;
 
-//   res.redirect("/questions/add"); //redirects user to page where user adds questions with the quiz with the quizID AFTER USER CLICKS CREATE A Qd to make the page that directs the user to the create a quUIZ
-// });
+const addQuestion = (db, input) => {
 
-const addQuestion = (db) => {
+  const { question, answer1, answer2, answer3, answer4, answer } = input;
 
-  return db.query(`INSERT INTO questions (quiz_id, question_desc) VALUES ($1, $2) RETURNING *`, [req.body.quiz_id, req.body.question_desc]).then(result => {
+  return db.query(`INSERT INTO questions (quiz_id, question_desc) VALUES ($1, $2) RETURNING *`, [input.quiz_id, input.question_desc])
+  .then(() => {
 
-    return db.query(`INSERT INTO question_options (quiz_id, question_id, option_1, option_2, option_3, option_4, answer) VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING *;` [req.body.quiz_id, req.body.question_id, req.body.option_1, req.body.option_2, req.body.option_3, req.body.option_4, req.body.answer]).then(result => {
+    db.query(`INSERT INTO question_options (quiz_id, question_id, option_1, option_2, option_3, option_4, answer) VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING *;` [input.quiz_id, question, answer1, answer2, answer3, answer4, answer])
+    .then(result => {
 
       return (result.rows)
     })
@@ -73,13 +79,14 @@ const getMyAttempts = (db, id) => {
 };
 exports.getMyAttempts = getMyAttempts;
 
-const addTestResult = (db) => {
+const addTestResult = (db) => { //need to refactor
 
-  return db.query(`INSERT INTO quiz_results (user_id, quiz_id, user_score, total_score, date, result_url) VALUES ($1, $2, $3, $4, $5, $6) RETURNING *`, [req.body.user_id, req.body.quiz_id, req.body.user_score, req.body.total_score, req.body.date, req.body.result_url]).then(result => {
+    
+
+  return db.query(`INSERT INTO quiz_results (user_id, quiz_id, user_score, total_score, date, result_url) VALUES ($1, $2, $3, $4, $5, $6) RETURNING *`, []).then(result => {
     return(res.rows[0].user_id)
     }).catch(err => {
     res.status(500).json({error: err.message});
   });
 };
 exports.addTestResult = addTestResult;
-
