@@ -2,11 +2,19 @@ body {
   display: flex;
   flex-direction: column;
   min-height: 100vh;
-  font-family: "DM Sans", sans-serif;
+  font-family: 'DM Sans', sans-serif;
+  background-color: #f9fafb;
+  margin: 0;
 }
 
 a {
   text-decoration: none;
+  line-height: 1.5rem;
+  color: inherit;
+}
+ul[role='list'] {
+  list-style: none;
+  padding: 0;
 }
 
 .text-center {
@@ -31,4 +39,9 @@ a {
 
 .flex-row {
   display: flex;
+}
+
+.list-inline {
+  display: inline;
+  margin: 0 2vw;
 }

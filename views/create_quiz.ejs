@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <title>Create - a quiz</title>
+    <title>Home Page</title>
 
     <link rel="stylesheet" href="/vendor/normalize-4.1.1.css" type="text/css" />
     <link rel="stylesheet" href="/vendor/border-box.css" type="text/css" />
@@ -18,15 +18,24 @@
   </head>
 
   <body>
-    <div class="user_name">Create New Quiz</div>
-    <div class="quiz">
-      <Section class="quiz_my_quizzes">
-        <div class="quiz_card text-center">
-          <h4>Do you want to create a Quiz?</h4>
-          <a class="primary-btn" href="/quizzes/add">Create</a>
-          <a class="primary-btn" href="/">Cancel</a>
+    <%- include('partials/_header') %>
+    <form method="POST" action="/quizzes/add">
+      <div class="create_quiz_container flex-column">
+        <h1>Create a Quiz</h1>
+        <label>Enter Quiz Title:</label>
+        <input type="text" name="quiz_title" />
+        <label>Enter Description:</label>
+        <input type="text" name="quiz_description" />
+        <div class="visibility_option">
+          <label>Visible to Public:</label>
+          <input type="radio" value="true" name="is_public" />
+          <label for="yes">Yes</label>
+          <input type="radio" value="false" name="is_public" />
+          <label for="no">No</label>
         </div>
-      </Section>
-    </div>
+        <button class="primary-btn" type="submit">Submit</button>
+      </div>
+    </form>
+    <%- include('partials/_footer') %>
   </body>
 </html>

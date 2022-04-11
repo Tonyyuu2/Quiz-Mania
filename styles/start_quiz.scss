@@ -1,0 +1,29 @@
+.main_container {
+  margin: 4rem auto;
+  gap: 1rem;
+  align-items: center;
+  width: 80%;
+  background-color: #ccbfda;
+  background-image: linear-gradient(
+      315deg,
+      #ccbfda 0%,
+      #c3e4e4 39%,
+      #ffffff 95%
+  );
+  padding: 2rem;
+  justify-content: space-between;
+  border-radius: 2rem;
+  font-size: 1.2rem;
+}
+
+.rule_banner {
+  height: 18rem;
+}
+.rule_container .fa-solid {
+  margin-right: 10px;
+  color: rgb(43, 110, 219);
+}
+
+.rule_btn {
+  margin-top: 21px;
+}

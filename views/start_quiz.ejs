@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>Quiz - Question</title>
+
+        <link rel="stylesheet" href="/vendor/normalize-4.1.1.css" type="text/css" />
+        <link rel="stylesheet" href="/vendor/border-box.css" type="text/css" />
+        <link rel="stylesheet" href="/styles/main.css" type="text/css" />
+        <link
+            rel="stylesheet"
+            href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+        />
+        <link rel="stylesheet" href="/styles/layout.css" type="text/css" />
+        <link rel="stylesheet" href="/styles/start_quiz.css" type="text/css" />
+        <link
+            href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&display=swap"
+            rel="stylesheet"
+        />
+
+        <script type="text/javascript" src="/vendor/jquery-3.0.0.js"></script>
+        <script type="text/javascript" src="/scripts/app.js"></script>
+    </head>
+    <body>
+      <%- include('partials/_header') %>
+        <div class="main_container flex-row">
+            <div class="rule_container">
+                <h1 class="rule_title">Quiz Rules!</h1>
+                <p>
+                  <i class="fa-solid fa-palette rules_icon"></i>Each multiple choice
+                  question has only one correct answer.
+              </p>
+              <p>
+                  <i class="fa-solid fa-palette rules_icon"></i>For each correct answer
+                  you'll be awarded 1 point.
+              </p>
+              <p>
+                  <i class="fa-solid fa-palette rules_icon"></i>You can not change your
+                  answer or go back to previous questions.
+              </p>
+              <p>
+                  <i class="fa-solid fa-palette rules_icon"></i>Once you submit your
+                  quiz you will be able to see your result.
+              </p>
+              <p>
+                  <i class="fa-solid fa-palette rules_icon"></i>You can share your
+                  result with other users by using the link provided at the end.
+              </p>
+              <button class="primary-btn rule_btn">Start Quiz</button>
+          </div>
+          <img class="rule_banner" src="./leaderBoard.png" alt="leaderboard_img" />
+      </div>
+      <%- include('partials/_footer') %>
+  </body>
+</html>

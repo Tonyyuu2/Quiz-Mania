@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>Quiz - Question</title>
+
+        <link rel="stylesheet" href="/vendor/normalize-4.1.1.css" type="text/css" />
+        <link rel="stylesheet" href="/vendor/border-box.css" type="text/css" />
+        <link rel="stylesheet" href="/styles/main.css" type="text/css" />
+        <link
+            rel="stylesheet"
+            href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+        />
+        <link rel="stylesheet" href="/styles/layout.css" type="text/css" />
+        <link rel="stylesheet" href="/styles/my_attempts.css" type="text/css" />
+        <link
+            href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&display=swap"
+            rel="stylesheet"
+        />
+
+        <script type="text/javascript" src="/vendor/jquery-3.0.0.js"></script>
+        <script type="text/javascript" src="/scripts/app.js"></script>
+    </head>
+
+    <body>
+      <%- include('partials/_header') %>
+        <div class="history flex-column">
+            <div class="history_container flex-row">
+                <h1 class="order">#1</h1>
+                <div class="quiz_info flex-row">
+                    <div class="quiz_title">
+                        <i class="fa-solid fa-book"></i>Chemistry
+                    </div>
+                    <div class="quiz_score"><i class="fa-solid fa-award"></i> 9 / 10</div>
+
+                    <div class="quiz_time">
+                        <i class="fa-solid fa-calendar-days"></i>2022-04-01 12:05 PM
+                    </div>
+                </div>
+            </div>
+            <div class="history_container flex-row">
+                <h1 class="order">#1</h1>
+                <div class="quiz_info flex-row">
+                    <div class="quiz_title">
+                        <i class="fa-solid fa-book"></i>Chemistry
+                    </div>
+
+                    <div class="quiz_score"><i class="fa-solid fa-award"></i> 9 / 10</div>
+
+                    <div class="quiz_time">
+                        <i class="fa-solid fa-calendar-days"></i>2022-04-01 12:05 PM
+                    </div>
+                </div>
+            </div>
+        </div>
+        <%- include('partials/_footer') %>
+    </body>
+</html>

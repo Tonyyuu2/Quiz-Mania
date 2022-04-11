@@ -9,7 +9,7 @@
             href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
         />
         <link rel="stylesheet" href="/styles/layout.css" type="text/css" />
-        <link rel="stylesheet" href="/styles/partials.css" type="text/css" />
+        <link rel="stylesheet" href="/styles/user_generated_quiz.css" type="text/css" />
         <link
             href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&display=swap"
             rel="stylesheet"
@@ -20,18 +20,15 @@
     </head>
 
     <body>
-        <div class="navbar flex-row">
-          <a href='https://www.linkpicture.com/view.php?img=LPic6254a083c03191147485979'><img src='https://www.linkpicture.com/q/QuizMania2-copy.png' type='image' alt="logo_img" class="logo"></a>
+      <%- include('partials/_header') %>
+        <div class="q_container flex-column">
+            <img src="./images/notepad.svg" class="board_img" />
+            <h2>Here's your quiz</h2>
             <div>
-                <ul role="list" class="navbar_text">
-                    <li class="list-inline"><a href="/">Home</a></li>
-                    <li class="list-inline"><a href="/quizzes/create">Create Quiz</a></li>
-                    <li class="list-inline"><a href="/my_attempts">My History</a></li>
-                    <li class="list-inline"><a href="/">Logout</a></li>
-                </ul>
+                <a class="primary-btn q_btn">Share with friends</a>
+                <a class="primary-btn q_btn">Take this Quiz now</a>
             </div>
         </div>
+        <%- include('partials/_footer') %>
     </body>
 </html>
-
-

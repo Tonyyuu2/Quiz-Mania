@@ -7,6 +7,8 @@ const sassMiddleware = require("./lib/sass-middleware");
 const express = require("express");
 const app = express();
 const morgan = require("morgan");
+const cookieSession = require('cookie-session');
+const bodyParser = require("body-parser");
 
 // PG database client/connection setup
 const { Pool } = require("pg");
@@ -18,7 +20,11 @@ db.connect();
 // 'dev' = Concise output colored by response status for development use.
 //         The :status token will be colored red for server error codes, yellow for client error codes, cyan for redirection codes, and uncolored for all other codes.
 app.use(morgan("dev"));
-
+app.use(cookieSession({
+  name: 'session',
+  keys: ['key1', 'key2']
+}));
+app.use(bodyParser.urlencoded({extended: true}));
 app.set("view engine", "ejs");
 app.use(express.urlencoded({ extended: true }));
 
@@ -43,11 +49,11 @@ const takingTests = require("./routes/taking_test");
 
 // Mount all resource routes
 // Note: Feel free to replace the example routes below with your own
-app.use("/api/quizzes", quizzesRoutes(db));
-app.use("/api/questions", questionsRoutes(db));
-app.use("/api/results", resultsRoutes(db));
-app.use("/api/my_attempts", myAttempts(db));
-app.use("/api/taking_tests", takingTests(db));
+app.use("/quizzes", quizzesRoutes(db));
+app.use("/questions", questionsRoutes(db));
+app.use("/results", resultsRoutes(db));
+app.use("/my_attempts", myAttempts(db));
+app.use("/taking_tests", takingTests(db));
 // Note: mount other resources here, using the same pattern above
 
 // Home page
@@ -58,8 +64,7 @@ app.get("/", (req, res) => {
   db.query(`SELECT * FROM quizzes`).then(result => {
     console.log({ quizzes: result.rows});
     //const templateVars = result.rows[0];
-    res.render("index", { quizzes: result.rows }); //switch back to index before push
-
+    res.render("home", { quizzes: result.rows });
   });
 });
 
