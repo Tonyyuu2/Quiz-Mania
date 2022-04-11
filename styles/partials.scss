@@ -1,0 +1,41 @@
+.navbar {
+  background: linear-gradient(to left, #a18cd1, #fbc2eb);
+  border-radius: 0 1rem 0 1rem;
+  box-shadow: 0 15px 4px rgb(146 161 176 / 30%);
+  padding-left: 1vw;
+  position: fixed;
+  width: 100%;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.logo {
+  height: 100px;
+}
+
+.navbar_text {
+  color: white;
+  font-weight: 700;
+  font-size: 1.2rem;
+  text-align: center;
+}
+
+.footer {
+  align-items: center;
+  justify-content: center;
+  border-radius: 1rem 0 1rem 0;
+  box-shadow: 0 1px 25px #e5e7eb;
+  gap: 1rem;
+  margin-top: 2rem;
+  padding: 2rem;
+}
+
+.footer img {
+  width: 2rem;
+}
+
+.footer h2,
+p,
+ul {
+  margin: 0;
+}

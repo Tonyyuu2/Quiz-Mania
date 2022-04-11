@@ -1,0 +1,48 @@
+.ques_contanier {
+  margin: 5rem 5rem;
+}
+.ques_title {
+  justify-content: space-around;
+  align-items: center;
+  padding: 0 1rem;
+  border-radius: 1rem;
+  color: #ffffff;
+  background-color: #0093e9;
+  background-image: linear-gradient(270deg, #0093e9 0%, #82efe2 100%);
+}
+
+.ques_number {
+  font-size: 3.5rem;
+}
+
+.ques {
+  margin-left: 1.5rem;
+}
+
+.ques_options {
+  gap: 2rem;
+  flex-wrap: wrap;
+  margin: 2rem 0;
+  justify-content: space-around;
+}
+
+.options {
+  background-color: rgb(241, 239, 239);
+  padding: 1.5rem 0.5rem;
+  flex-basis: 40%;
+  border-radius: 1rem;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+.options:hover {
+  background: rgb(180, 204, 243);
+}
+
+.options input {
+  opacity: 0;
+}
+
+.ques_btn {
+  justify-content: space-between;
+}

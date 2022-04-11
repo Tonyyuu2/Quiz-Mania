@@ -1,0 +1,35 @@
+.quiz {
+  display: flex;
+  justify-content: space-around;
+
+  &_card {
+    margin: 1rem;
+    border-radius: 1rem;
+    background-color: #88df60;
+    background-image: linear-gradient(
+      to right top,
+      #88df60,
+      #a7e57a,
+      #c1eb94,
+      #d7f1b0,
+      #eaf7cd
+    );
+    padding: 1em 1em;
+  }
+
+  &_header {
+    text-align: center;
+    font-size: 1.5rem;
+  }
+
+  &_card:hover {
+    transition: 0.5s;
+    box-shadow: 8px 8px 10px #888888;
+  }
+}
+
+.user_name {
+  text-align: center;
+  font-size: 2rem;
+  margin: 2rem;
+}
