@@ -33,3 +33,21 @@
   font-size: 2rem;
   margin: 2rem;
 }
+
+.create_quiz_container {
+  margin: 0 auto 4rem auto;
+  width: 30%;
+  gap: 1.2rem;
+  box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px,
+    rgba(60, 64, 67, 0.15) 0px 1px 3px 1px;
+  border-radius: 2rem;
+  padding: 2rem;
+}
+
+.visibility_option input {
+  margin: 0 10px;
+}
+
+.header_text {
+  text-align: center;
+}

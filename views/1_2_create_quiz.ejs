@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>QuizMania - Create a Quiz</title>
+    <link rel="stylesheet" href="/styles/quiz.css" type="text/css" />
+  </head>
+
+  <body>
+    <%- include('partials/_header') %>
+    <form method="POST" action="/quizzes/add">
+      <div class="create_quiz_container flex-column nav-margin">
+        <h1 class="header_text">Create a Quiz</h1>
+        <label>Enter Quiz Title:</label>
+        <input type="text" name="quiz_title" required />
+        <label>Enter Description:</label>
+        <input type="text" name="quiz_description" required />
+        <div class="visibility_option">
+          <label>Visible to Public:</label>
+          <input type="radio" value="true" name="is_public" />
+          <label for="yes">Yes</label>
+          <input type="radio" value="false" name="is_public" />
+          <label for="no">No</label>
+        </div>
+        <button class="primary-btn" type="submit">Submit</button>
+      </div>
+    </form>
+    <%- include('partials/_footer') %>
+  </body>
+</html>
