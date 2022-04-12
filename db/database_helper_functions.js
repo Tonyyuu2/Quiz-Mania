@@ -36,7 +36,6 @@ const addQuiz = (db, input) => {
 
   return db.query(`INSERT INTO quizzes (user_id, public, description, url) VALUES ($1, $2, $3, $4) RETURNING *`, [1, is_public, quiz_description, quizURL]).then(result => {
     return (result.rows[0].id);
-
   })
     .catch(err => {
       console.log(err.message);
