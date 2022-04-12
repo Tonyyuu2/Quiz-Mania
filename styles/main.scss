@@ -2,7 +2,7 @@ body {
   display: flex;
   flex-direction: column;
   min-height: 100vh;
-  font-family: 'DM Sans', sans-serif;
+  font-family: "DM Sans", sans-serif;
   background-color: #f9fafb;
   margin: 0;
 }
@@ -12,7 +12,7 @@ a {
   line-height: 1.5rem;
   color: inherit;
 }
-ul[role='list'] {
+ul[role="list"] {
   list-style: none;
   padding: 0;
 }
@@ -44,4 +44,8 @@ ul[role='list'] {
 .list-inline {
   display: inline;
   margin: 0 2vw;
+}
+
+.nav-margin {
+  margin-top: 25vh;
 }

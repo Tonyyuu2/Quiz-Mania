@@ -9,12 +9,12 @@ const { addTestResult } = require("../db/database_helper_functions");
 module.exports = (db) => {
   // /taking_tests
   router.get("/", (req, res) => {
-    res.render(" "); //takes user to form to answer quiz questions
+    res.render("display_question"); //takes user to form to answer quiz questions
   });
 
   router.post("/"), (req, res) => {
     addTestResult(db).then(result => {
-      res.redirect(" ");
+      res.redirect("/result");
     }).catch(err => {
       res.status(500).send("failed")
     })
