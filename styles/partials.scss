@@ -23,9 +23,15 @@
 }
 
 @keyframes bounce {
-  0%   { transform: translateY(0); }
-  50%  { transform: translateY(-20px); }
-  100% { transform: translateY(0); }
+  0% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-20px);
+  }
+  100% {
+    transform: translateY(0);
+  }
 }
 
 .navbar_text {
@@ -36,28 +42,28 @@
 }
 
 .list-inline {
-display: inline-block;
-margin-block: 2px;
-text-decoration: none;
-color: #fff;
-position: relative;
+  display: inline-block;
+  margin-block: 2px;
+  text-decoration: none;
+  color: #fff;
+  position: relative;
 }
 
 .list-inline:after {
-  content: '';
-    width: 100%;
-    height: 2px;
-    background-color: #fcfafc;
-    border-radius: 4px;
-    position: absolute;
-    left: 0;
-    bottom: 0;
-    transform: scaleX(0);
-    transform-origin: left;
-    transition: transform .25s ease;
+  content: "";
+  width: 100%;
+  height: 2px;
+  background-color: #fcfafc;
+  border-radius: 4px;
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.25s ease;
 }
 
-.list-inline:hover::after{
+.list-inline:hover::after {
   transform: scaleX(1);
 }
 
@@ -80,4 +86,3 @@ p,
 ul {
   margin: 0;
 }
-

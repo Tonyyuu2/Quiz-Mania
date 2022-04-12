@@ -32,6 +32,12 @@
   text-align: center;
   font-size: 2rem;
   margin: 2rem;
+  float: left;
+  padding: 5px;
+  display: block;
+  opacity: 0;
+  animation: revealText 1s forwards;
+  animation-delay: 0.4s;
 }
 
 .create_quiz_container {
@@ -48,7 +54,7 @@
   margin: 0 10px;
 }
 
-#radioinput{
+#radioinput {
   background: pink;
 }
 
@@ -65,7 +71,6 @@
   height: auto;
 }
 
-
 .input {
   border: none;
   border-bottom: 3px solid #b880f4;
@@ -73,4 +78,3 @@
   background: rgb(227, 227, 227);
   padding: 5px;
 }
-

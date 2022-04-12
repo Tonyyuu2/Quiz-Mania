@@ -1,7 +1,10 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <script src="https://kit.fontawesome.com/yourcode.js" crossorigin="anonymous"></script>
+    <script
+      src="https://kit.fontawesome.com/yourcode.js"
+      crossorigin="anonymous"
+    ></script>
     <title>QuizMania - Home</title>
     <link rel="stylesheet" href="/styles/quiz.css" type="text/css" />
   </head>
@@ -11,15 +14,15 @@
 
     <div class="user_name nav-margin">
       <div class="welcome">Welcome</div>
-    <div class="user_name1">Johnny Smith</div>
-  </div>
+      <div class="user_name1">Johnny Smith</div>
+    </div>
     <div class="quiz">
       <Section class="quiz_my_quizzes">
         <div class="quizheader">
           <i class="fa-solid fa-user"></i>
           <p class="quiz_header">My quizzes</p>
-          </div>
-         <% for(const quiz of quizzes) { %>
+        </div>
+        <% for(const quiz of quizzes) { %>
         <div class="quiz_card text-center">
           <h4><%=quiz.description%></h4>
           <a class="primary-btn" href="/quizzes/u/<%=quiz.url%>">Attempt</a>
@@ -27,7 +30,7 @@
         <% } %>
       </Section>
       <Section class="quiz_featured_quizzes">
-          <div class="quizheader">
+        <div class="quizheader">
           <i class="fa-solid fa-star" id="star"></i>
           <p class="quiz_header">Featured quizzes</p>
         </div>
