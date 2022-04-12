@@ -14,27 +14,30 @@ const { addQuestion } = require("../db/database_helper_functions");
 
 module.exports = (db) => {
   //questions/add
-  router.get("/add", (req, res) => {
-    res.render("add_questions"); //redirects user to page where user can add questions to the quiz
+  router.get("/:id/add", (req, res) => {
+
+    res.render("1_3_add_question", { id: req.params.id }); //redirects user to page where user can add questions to the quiz
   });
 
-  router.post("/add", (req, res) => {
+  router.post("/:id/add", (req, res) => {
     //redirects user back to the same page after adding the questions on to the database while referencing the quiz_id ADDS QUESTION
-    addQuestion(db, req.body).then(result => {
-      res.redirect(" ")
+    const quizId = req.params.id;
+    addQuestion(db, req.body, quizId).then(result => {
+      res.redirect(`/questions/${result}/add`);
     }).catch(err => {
-      res.status(500).send("failed")
-    })
+      console.log(err);
+      res.status(500).send("failed");
+    });
   });
 
 
   router.post("/add-all", (req, res) => { //need to change semantics
-  //adds one or more questions then redirects, FINISHES CREATING QUIZ //consolidation page
+    //adds one or more questions then redirects, FINISHES CREATING QUIZ //consolidation page
     addQuestion(db, req.body).then(result => {
-      res.redirect(" ") //add redirect
+      res.redirect(" "); //add redirect
     }).catch(err => {
-      res.status(500).send("failed")
-    })
+      res.status(500).send("failed");
+    });
   });
   return router;
 };

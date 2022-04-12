@@ -10,12 +10,12 @@ const router = express.Router();
 const bodyParser = require('body-parser');
 router.use(bodyParser.urlencoded({ extended: true }));
 
-const { getQuiz, getQuizFromUserURL, addQuiz} = require("../db/database_helper_functions");
+const { getQuiz, getQuizFromUserURL, addQuiz } = require("../db/database_helper_functions");
 
 module.exports = (db) => {
   //quizzes/add
   router.get("/add", (req, res) => {
-    res.render("add_questions"); //redirects user to page where user creates the quiz (not questions) // change render page
+    res.render("1_2_create_quiz"); //redirects user to page where user creates the quiz (not questions) // change render page
   });
 
   //quizzes/:id
@@ -23,8 +23,8 @@ module.exports = (db) => {
     getQuiz(db, req.params).then(result => {
       res.render(" ");
     }).catch(err => {
-      res.status(500).send("failed")
-    })
+      res.status(500).send("failed");
+    });
   });
 
   //quizzes/u/:id
@@ -32,17 +32,18 @@ module.exports = (db) => {
     getQuizFromUserURL(db, req.params).then(result => {
       res.render(" ");
     }).catch(err => {
-      res.status(500).send("failed")
-    })
+      res.status(500).send("failed");
+    });
   });
 
   router.post("/add", (req, res) => {
-    addQuiz(db).then(result => {
-      res.redirect("/question/add") //redirect happens here
+    addQuiz(db, req.body).then(result => {
+      res.redirect(`/questions/${result}/add`); //redirect happens here
     })
-    .catch(err => {
-      res.status(500).send("failed")
-    })
+      .catch(err => {
+        console.log(err);
+        res.status(500).send("failed");
+      });
   });
 
   return router;
