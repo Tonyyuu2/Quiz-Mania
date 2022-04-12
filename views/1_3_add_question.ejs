@@ -11,7 +11,12 @@
 
   <body>
     <%- include('partials/_header') %>
-    <form method="POST" action="/questions/add">
+    <% if(!id) {%> 
+    <form method="POST" action="/questions/add"> 
+      <%} else{%> 
+        <form method="POST" action="/questions/<%= id %>/add"> 
+          <%}%> 
+
     <div class="question_container flex-column nav-margin">
         <h1>Add a Question!</h1>
         <div>
@@ -21,23 +26,23 @@
           </div>
           <div>
             <label>Option 1: </label>
-            <input type="text" name="answer1" placeholder="Add option 1">
+            <input type="text" name="option1" placeholder="Add option 1">
           </div>
           <div>
             <label>Option 2: </label>
-            <input type="text" name="answer2" placeholder="Add option 2">
+            <input type="text" name="option2" placeholder="Add option 2">
           </div>
           <div>
             <label>Option 3: </label>
-            <input type="text" name="answer3" placeholder="Add option 3">
+            <input type="text" name="option3" placeholder="Add option 3">
           </div>
           <div>
             <label>Option 4: </label>
-            <input type="text" name="answer4" placeholder="Add option 4">
+            <input type="text" name="option4" placeholder="Add option 4">
           </div>
           <div>
-            <label>Answer: </label>
-            <input  type="text" name="correct_answer" placeholder="Correct answer">
+            <label>Answer: </label>         
+            <input  type="text" name="answer" placeholder="Correct answer">
           </div>
           <div>
             <button class="primary-btn" type="submit">Add another Question!</button>
