@@ -8,6 +8,6 @@ CREATE TABLE quiz_results (
   quiz_id INTEGER REFERENCES quizzes(id) ON DELETE CASCADE,
   user_score INTEGER NOT NULL,
   total_score INTEGER NOT NULL,
-  date DATE,
+  date TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
   result_url VARCHAR(255)
 );

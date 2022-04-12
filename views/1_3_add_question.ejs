@@ -11,11 +11,11 @@
 
   <body>
     <%- include('partials/_header') %>
-    <form method="POST" action="/question/add"> 
+    <form method="POST" action="/questions/add">
     <div class="question_container flex-column nav-margin">
-     
-        <h1>Add a Question!</h1>   
-        <div>     
+        <h1>Add a Question!</h1>
+        <div>
+          <input type="hidden" value="<%= ide %>" name="quiz_id">
             <label>Question: </label>
             <input id="question" type="text" name="question" placeholder="Add question">
           </div>
@@ -36,18 +36,15 @@
             <input type="text" name="answer4" placeholder="Add option 4">
           </div>
           <div>
-            <label>Answer: </label>         
-            <input  type="text" name="correct-answer" placeholder="Correct answer">
+            <label>Answer: </label>
+            <input  type="text" name="correct_answer" placeholder="Correct answer">
           </div>
-          
-          <form action="/questions/add" method="POST">
           <div>
             <button class="primary-btn" type="submit">Add another Question!</button>
             <button class="primary-btn" type="submit">Done</button>
-          </form>
           </div>
         </form>
-      
+
     </div>
 
 
