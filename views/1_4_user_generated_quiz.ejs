@@ -15,8 +15,15 @@
       <img src="https://svgshare.com/i/gA8.svg" class="board_img" />
       <h2>Here's your quiz</h2>
       <div>
-        <a class="primary-btn q_btn">Share with friends</a>
-        <a class="primary-btn q_btn">Take this Quiz now</a>
+        <a class="primary-btn q_btn" id="share" href="/quizzes/u/<%= url %>"
+          >Share with friends</a
+        >
+        <a
+          class="primary-btn q_btn"
+          target="_blank"
+          href="/quizzes/u/<%= url %>"
+          >Take this Quiz now</a
+        >
       </div>
     </div>
     <%- include('partials/_footer') %>

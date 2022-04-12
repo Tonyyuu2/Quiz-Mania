@@ -24,7 +24,9 @@ module.exports = (db) => {
     //redirects user back to the same page after adding the questions on to the database while referencing the quiz_id ADDS QUESTION
     const quizId = req.params.id;
     addQuestion(db, req.body, quizId).then(result => {
+
       res.redirect(`/questions/${result}/add`);
+
     }).catch(err => {
       console.log(err);
       res.status(500).send("failed");

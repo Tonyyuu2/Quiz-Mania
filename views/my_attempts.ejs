@@ -8,19 +8,24 @@
   <body>
     <%- include('partials/_header') %>
     <div class="history flex-column nav-margin">
+      <% let index = 1%> <% for(const result of results) { %>
       <div class="history_container flex-row">
-        <h1 class="order">#1</h1>
+        <h1 class="order">#<%= index %></h1>
         <div class="quiz_info flex-row">
           <div class="quiz_title">
-            <i class="fa-solid fa-book"></i>Chemistry
+            <i class="fa-solid fa-book"></i><%= result.title %>
           </div>
-          <div class="quiz_score"><i class="fa-solid fa-award"></i> 9 / 10</div>
+          <div class="quiz_score">
+            <i class="fa-solid fa-award"></i> <%= result.user_score %>/ <%=
+            result.total_score %>
+          </div>
 
           <div class="quiz_time">
-            <i class="fa-solid fa-calendar-days"></i>2022-04-01 12:05 PM
+            <i class="fa-solid fa-calendar-days"></i><%= result.date %>
           </div>
         </div>
       </div>
+      <% index++%> <% }%>
       <div class="history_container flex-row">
         <h1 class="order">#1</h1>
         <div class="quiz_info flex-row">
