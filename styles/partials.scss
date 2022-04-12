@@ -10,7 +10,23 @@
 }
 
 .logo {
-  height: 100px;
+  align-self: flex-end;
+  width: 175px;
+  height: 175px;
+  animation-duration: 2s;
+  animation-iteration-count: infinite;
+  transform-origin: bottom;
+}
+
+.logo:hover {
+  animation-name: bounce;
+  animation-timing-function: ease;
+}
+
+@keyframes bounce {
+  0%   { transform: translateY(0); }
+  50%  { transform: translateY(-20px); }
+  100% { transform: translateY(0); }
 }
 
 .navbar_text {
@@ -18,6 +34,32 @@
   font-weight: 700;
   font-size: 1.2rem;
   text-align: center;
+}
+
+.list-inline {
+display: inline-block;
+margin-block: 2px;
+text-decoration: none;
+color: #fff;
+position: relative;
+}
+
+.list-inline:after {
+  content: '';
+    width: 100%;
+    height: 2px;
+    background-color: #fcfafc;
+    border-radius: 4px;
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform .25s ease;
+}
+
+.list-inline:hover::after{
+  transform: scaleX(1);
 }
 
 .footer {
@@ -39,3 +81,4 @@ p,
 ul {
   margin: 0;
 }
+

@@ -5,14 +5,14 @@
   &_card {
     margin: 1rem;
     border-radius: 1rem;
-    background-color: #88df60;
+    background-color: #df8ff5;
     background-image: linear-gradient(
       to right top,
-      #88df60,
-      #a7e57a,
-      #c1eb94,
-      #d7f1b0,
-      #eaf7cd
+      #d0c4ed,
+      #dcafeb,
+      #fbc2eb,
+      #f5bee8,
+      #f9e4f6
     );
     padding: 1em 1em;
   }
@@ -48,6 +48,29 @@
   margin: 0 10px;
 }
 
+#radioinput{
+  background: pink;
+}
+
 .header_text {
   text-align: center;
 }
+
+.brain_img {
+  position: absolute;
+  right: 40rem;
+  top: 15.1rem;
+  clip: rect(0px, 100px, 73.5px, 0px);
+  max-width: 100%;
+  height: auto;
+}
+
+
+.input {
+  border: none;
+  border-bottom: 3px solid #b880f4;
+  border-radius: 2rem;
+  background: rgb(227, 227, 227);
+  padding: 5px;
+}
+

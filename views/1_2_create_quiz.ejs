@@ -7,22 +7,26 @@
 
   <body>
     <%- include('partials/_header') %>
-    <form method="POST" action="/quizzes/add">
-      <div class="create_quiz_container flex-column nav-margin">
-        <h1 class="header_text">Create a Quiz</h1>
-        <label>Enter Quiz Title:</label>
-        <input type="text" name="quiz_title" required />
-        <label>Enter Description:</label>
-        <input type="text" name="quiz_description" required />
-        <div class="visibility_option">
-          <label>Visible to Public:</label>
-          <input type="radio" value="true" name="is_public" />
-          <label for="yes">Yes</label>
-          <input type="radio" value="false" name="is_public" />
-          <label for="no">No</label>
+      <form method="POST" action="/quizzes/add">
+        <div class="create_quiz_container flex-column nav-margin">
+          <!-- <img
+            src="https://www.linkpicture.com/q/Brain_1.png" width="100px" height="100px"
+            class="brain_img"
+          /> -->
+          <h1 class="header_text">Create a Quiz</h1>
+          <label class="label">Enter Quiz Title:</label>
+          <input class="input" type="text" name="quiz_title" required />
+          <label class="label">Enter Description:</label>
+          <input class="input" type="text" name="quiz_description" required />
+          <div class="visibility_option">
+            <label>Visible to Public:</label>
+            <input id="radioinput" type="radio" value="true" name="is_public" />
+            <label for="yes">Yes</label>
+            <input id ="radioinput" type="radio" value="false" name="is_public" />
+            <label for="no">No</label>
+          </div>
+          <button class="primary-btn" type="submit">Submit</button>
         </div>
-        <button class="primary-btn" type="submit">Submit</button>
-      </div>
     </form>
     <%- include('partials/_footer') %>
   </body>
