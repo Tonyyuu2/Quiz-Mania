@@ -9,10 +9,10 @@
 
   <body>
     <%- include('partials/_header') %>
-    <form method="POST" action="/questions/<%= id %>/add"> 
+    <form method="POST" action="/questions/<%= id %>/add">
     <div class="question_container flex-column nav-margin">
         <h1>Add a Question!</h1>
-        <div>          
+        <div>
             <label>Question: </label>
             <input id="question" type="text" name="question" placeholder="Add question">
           </div>
@@ -36,9 +36,9 @@
             <label>Answer: </label>
             <input  type="text" name="answer" placeholder="Correct answer">
           </div>
-          <div>
+          <div class="button-container">
           <button class="primary-btn" type="submit">Add another Question!</button>
-          <button class="primary-btn" type="submit" formaction="/quizzes/<%= id %>/view">Done</button>         
+          <button class="primary-btn" type="submit" formaction="/quizzes/<%= id %>/view">Done</button>
           </div>
         </form>
 
