@@ -95,11 +95,12 @@ exports.addTestResult = addTestResult;
 
 const getQuizData = (db, id) => {
 
-  return db.query(`SELECT questions.* as ids FROM questions 
+  return db.query(`SELECT questions.* FROM questions 
   JOIN quizzes ON quiz_id = quizzes.id
   WHERE quizzes.id = $1`, [id])
     .then(result => {
-      console.log(result.rows);
+      result.rows[0]['quizID'] = id;
+      /*   console.log("--------------", result.rows, id); */
       return result.rows[0];
     })
     .catch(err => console.log(err));
@@ -107,3 +108,23 @@ const getQuizData = (db, id) => {
 };
 
 exports.getQuizData = getQuizData;
+
+const checkAnswer = (db, userInput, quizId, questionId) => {
+
+  return db.query(`SELECT answer FROM questions 
+  JOIN quizzes ON quiz_id = quizzes.id
+  WHERE quizzes.id = $1
+  AND questions.id= $2`, [quizId, questionId])
+    .then(result => {
+      if (result.rows[0].answer === userInput) {
+        return { isTrue: true };
+      } else {
+        return { isTrue: false, answer: result.rows[0].answer };
+      }
+
+    })
+    .catch(err => console.log(err));
+
+};
+
+exports.checkAnswer = checkAnswer;
