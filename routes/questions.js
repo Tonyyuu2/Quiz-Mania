@@ -14,6 +14,7 @@ const { addQuestion } = require("../db/database_helper_functions");
 
 module.exports = (db) => {
   //questions/add
+
   router.get("/:id/add", (req, res) => {
 
     res.render("1_3_add_question", { id: req.params.id }); //redirects user to page where user can add questions to the quiz
@@ -28,8 +29,8 @@ module.exports = (db) => {
       console.log(err);
       res.status(500).send("failed");
     });
-  });
 
+  });
 
   router.post("/add-all", (req, res) => { //need to change semantics
     //adds one or more questions then redirects, FINISHES CREATING QUIZ //consolidation page

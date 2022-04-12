@@ -10,7 +10,7 @@ module.exports = (db) => {
    // renders the quiz results after a user has finished a quiz
   router.get("/:id", (req, res) => {
     getAllResults(db, req.params).then(result => {
-      res.render(" ") //add render route
+      res.render("result") //add render route
     }).catch(err => {
       res.status(500).send("failed")
     })

@@ -15,13 +15,14 @@ const { getQuiz, getQuizFromUserURL, addQuiz } = require("../db/database_helper_
 module.exports = (db) => {
   //quizzes/add
   router.get("/add", (req, res) => {
+
     res.render("1_2_create_quiz"); //redirects user to page where user creates the quiz (not questions) // change render page
   });
 
   //quizzes/:id
   router.get("/:id", (req, res) => {
     getQuiz(db, req.params).then(result => {
-      res.render(" ");
+      res.render("start_quiz"); //renders the rule page with the particular quiz URL
     }).catch(err => {
       res.status(500).send("failed");
     });
@@ -30,12 +31,13 @@ module.exports = (db) => {
   //quizzes/u/:id
   router.get("/u/:id", (req, res) => {
     getQuizFromUserURL(db, req.params).then(result => {
-      res.render(" ");
+      res.render("start_quiz"); //renders the rule page with the particular quiz URL given a USER
     }).catch(err => {
       res.status(500).send("failed");
     });
   });
 
+  //quizzes/add -> post
   router.post("/add", (req, res) => {
     addQuiz(db, req.body).then(result => {
       res.redirect(`/questions/${result}/add`); //redirect happens here

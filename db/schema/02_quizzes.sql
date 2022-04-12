@@ -7,5 +7,6 @@ CREATE TABLE quizzes (
   user_id INTEGER REFERENCES users(id) ON DELETE CASCADE,
   public BOOLEAN DEFAULT TRUE,
   description VARCHAR(255) NOT NULL,
-  url VARCHAR(255) NOT NULL
+  url VARCHAR(255) NOT NULL,
+  title VARCHAR(255)
 );
