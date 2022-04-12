@@ -6,7 +6,20 @@
   </head>
   <body>
     <%- include('partials/_header') %>
-    <div class="main_container flex-row nav-margin">
+
+    <div class="nav-margin flex-row rule_info">
+      <img
+        class="rule_title_banner"
+        src="https://www.linkpicture.com/q/quiz_main.png"
+        alt="rocket_image"
+      />
+      <div>
+        <h2 class="rule_quizname">Quiz Name: <%= title %></h2>
+        <p>Description: <%= description %></p>
+      </div>
+    </div>
+
+    <div class="main_container flex-row">
       <div class="rule_container">
         <h1 class="rule_title">Quiz Rules!</h1>
         <p>
@@ -29,7 +42,9 @@
           <i class="fa-solid fa-palette rules_icon"></i>You can share your
           result with other users by using the link provided at the end.
         </p>
-        <button class="primary-btn rule_btn">Start Quiz</button>
+        <button class="primary-btn rule_btn">
+          <a href="/quiztest/<%= id%>"> Start Quiz </a>
+        </button>
       </div>
       <img
         class="rule_banner"

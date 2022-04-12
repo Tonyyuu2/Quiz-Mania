@@ -10,10 +10,7 @@
     <div class="ques_contanier nav-margin">
       <div class="ques_title flex-row">
         <h1 class="ques_number">1.</h1>
-        <h2 class="ques">
-          Which modern American Icon turned his sketches into an animated and
-          theme park empire?
-        </h2>
+        <h2 class="ques"><%= question_desc %></h2>
       </div>
       <div class="ques_options flex-row">
         <div class="options">
@@ -23,7 +20,7 @@
             name="quesOne"
             value="margotDisney"
           />
-          <lable for="margotDisney">Margot Disney</lable>
+          <lable for="margotDisney"><%= option_1 %></lable>
         </div>
         <div class="options">
           <input
@@ -32,11 +29,11 @@
             name="quesOne"
             value="waltDisney"
           />
-          <lable for="waltDisney">Walt Disney</lable>
+          <lable for="waltDisney"><%= option_2 %></lable>
         </div>
         <div class="options">
           <input type="radio" id="royDisney" name="quesOne" value="royDisney" />
-          <lable for="royDisney">Roy Disney</lable>
+          <lable for="royDisney"><%= option_3 %></lable>
         </div>
         <div class="options">
           <input
@@ -45,7 +42,7 @@
             name="quesOne"
             value="maddoxDisney"
           />
-          <lable for="maddoxDisney">Maddox Disney</lable>
+          <lable for="maddoxDisney"><%= option_4 %></lable>
         </div>
       </div>
       <div class="ques_btn flex-row">

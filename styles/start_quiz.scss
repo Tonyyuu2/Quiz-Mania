@@ -1,19 +1,22 @@
 .main_container {
-  margin: 4rem auto;
+  margin: 2rem auto 4rem auto;
   gap: 1rem;
   align-items: center;
   width: 80%;
   background-color: #ccbfda;
   background-image: linear-gradient(
-      315deg,
-      #ccbfda 0%,
-      #c3e4e4 39%,
-      #ffffff 95%
+    315deg,
+    #ccbfda 0%,
+    #c3e4e4 39%,
+    #ffffff 95%
   );
   padding: 2rem;
   justify-content: space-between;
   border-radius: 2rem;
   font-size: 1.2rem;
+  box-shadow: rgb(85, 91, 255) 0px 0px 0px 3px, rgb(31, 193, 27) 0px 0px 0px 6px,
+    rgb(255, 217, 19) 0px 0px 0px 9px, rgb(255, 156, 85) 0px 0px 0px 12px,
+    rgb(255, 85, 85) 0px 0px 0px 15px;
 }
 
 .rule_banner {
@@ -25,5 +28,19 @@
 }
 
 .rule_btn {
-  margin-top: 21px;
+  margin-top: 20px;
+}
+
+.rule_title_banner {
+  height: 12rem;
+}
+
+.rule_info {
+  justify-content: center;
+  align-items: center;
+  border-radius: 2rem;
+}
+
+.rule_quizname {
+  margin: 0;
 }

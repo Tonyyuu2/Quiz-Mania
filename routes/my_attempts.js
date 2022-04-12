@@ -10,10 +10,11 @@ module.exports = (db) => {
   // renders all the attempts and results of a user
   router.get("/", (req, res) => {
     getMyAttempts(db, 1).then(result => {
-      res.render("my_attempts");
+      res.render("my_attempts", { results: result });
     }).catch(err => {
-      res.status(500).send("failed")
-    })
-  })
+      console.log(err);
+      res.status(500).send("failed");
+    });
+  });
   return router;
 };
