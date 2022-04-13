@@ -27,8 +27,8 @@ const getQuizFromUserURL = async (db, url) => { // function that renders the qui
   const quizidFromURL = qidPromise.rows[0].id;
   console.log(quizidFromURL);
 
-  return db.query(`SELECT quizzes.title, quizzes.description, quizzes.id as quizId, 
-  questions.id as questionId FROM quizzes 
+  return db.query(`SELECT quizzes.title, quizzes.description, quizzes.id as quizId,
+  questions.id as questionId FROM quizzes
   JOIN questions ON questions.quiz_id = quizzes.id
   WHERE quizzes.id = $1`, [quizidFromURL]).then(result => {
     console.log(result.rows[0]);
@@ -111,7 +111,7 @@ exports.addTestResult = addTestResult;
 
 const getQuizData = (db, id) => {
 
-  return db.query(`SELECT questions.* FROM questions 
+  return db.query(`SELECT questions.* FROM questions
   JOIN quizzes ON quiz_id = quizzes.id
   WHERE quizzes.id = $1`, [id])
     .then(result => {
@@ -127,7 +127,7 @@ exports.getQuizData = getQuizData;
 
 const checkAnswer = (db, userInput, quizId, questionId) => {
 
-  return db.query(`SELECT answer FROM questions 
+  return db.query(`SELECT answer FROM questions
   JOIN quizzes ON quiz_id = quizzes.id
   WHERE quizzes.id = $1
   AND questions.id= $2`, [quizId, questionId])
@@ -147,7 +147,7 @@ exports.checkAnswer = checkAnswer;
 
 const getNextQuestion = (db, quizId, questionId) => {
 
-  return db.query(`SELECT questions.* FROM questions 
+  return db.query(`SELECT questions.* FROM questions
   JOIN quizzes ON quiz_id = quizzes.id
   WHERE quizzes.id = $1
   AND questions.id= $2`, [quizId, questionId])
@@ -160,3 +160,5 @@ const getNextQuestion = (db, quizId, questionId) => {
 };
 
 exports.getNextQuestion = getNextQuestion;
+
+

@@ -4,6 +4,7 @@ const bodyParser = require('body-parser');
 router.use(bodyParser.urlencoded({ extended: true }));
 
 const { addTestResult, getQuizData, checkAnswer, getNextQuestion } = require("../db/database_helper_functions");
+const quizzes = require('./quizzes');
 
 
 module.exports = (db) => {
@@ -63,3 +64,6 @@ module.exports = (db) => {
   return router;
 };
 
+`SELECT quizzes.title, quiz_results.score, count(quiz_attempts.is_true) as total_score FROM quizzes JOIN quiz_results ON quiz_results.quiz_id = quizzes.id JOIN quiz_attempts ON quiz_attempts.question_id = questions.id WHERE users.id = 1`
+
+``
