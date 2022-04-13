@@ -12,9 +12,19 @@ module.exports = (db) => {
     const quizID = req.params.id;
     getQuizData(db, quizID).then(result => {
       /* localStorage.setItem("questions", result); */
-      res.render("2_2_display_question", result); //takes user to form to answer quiz questions
+      res.render("2_2_display_question", result[0]); //takes user to form to answer quiz questions
     });
   });
+
+  router.get("/ajax/:id", (req, res) => {
+    const quizID = req.params.id;
+    getQuizData(db, quizID).then(result => {
+      /* localStorage.setItem("questions", result); */
+      res.send(result); //takes user to form to answer quiz questions
+    });
+  });
+
+
 
   router.post("/:quizId/questions/:queID", (req, res) => {
 

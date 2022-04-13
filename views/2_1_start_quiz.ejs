@@ -6,13 +6,8 @@
   </head>
   <body>
     <%- include('partials/_header') %>
-
+  <div class="rule-container">
     <div class="nav-margin flex-row rule_info">
-      <img
-        class="rule_title_banner"
-        src="https://www.linkpicture.com/q/quiz_main.png"
-        alt="rocket_image"
-      />
       <div>
         <h2 class="rule_quizname">Quiz Name: <%= title %></h2>
         <p>Description: <%= description %></p>
@@ -23,24 +18,27 @@
       <div class="rule_container">
         <h1 class="rule_title">Quiz Rules!</h1>
         <p>
-          <i class="fa-solid fa-palette rules_icon"></i>Each multiple choice
+          <i class="fa-solid fa-square-check"></i>Each multiple choice
           question has only one correct answer.
         </p>
         <p>
-          <i class="fa-solid fa-palette rules_icon"></i>For each correct answer
-          you'll be awarded 1 point.
+          <i class="fa-solid fa-square-check"></i>For each correct answer
+          you will be awarded 1 point.
         </p>
         <p>
-          <i class="fa-solid fa-palette rules_icon"></i>You can not change your
+          <i class="fa-solid fa-square-check"></i>You can not change your
           answer or go back to previous questions.
         </p>
         <p>
-          <i class="fa-solid fa-palette rules_icon"></i>Once you submit your
+          <i class="fa-solid fa-square-check"></i>Once you submit your
           quiz you will be able to see your result.
         </p>
         <p>
-          <i class="fa-solid fa-palette rules_icon"></i>You can share your
+          <i class="fa-solid fa-square-check"></i>You can share your
           result with other users by using the link provided at the end.
+        </p>
+        <p>
+          <i class="fa-solid fa-square-check"></i> Have fun! If you are stuck, call a mentor!
         </p>
         <button class="primary-btn rule_btn">
           <a href="/quiz-attempts/?qid=<%= quizid%>&que=<%= questionid%>">
@@ -48,12 +46,23 @@
           </a>
         </button>
       </div>
-      <img
+      <!-- <img
         class="rule_banner"
         src="https://www.linkpicture.com/q/leaderBoard.png"
         alt="leaderboard_img"
-      />
+      /> -->
+      <img
+      class="rule_title_banner"
+      src="https://www.linkpicture.com/q/quiz_main.png"
+      alt="rocket_image"/>
     </div>
+    <!-- <div class="rule_image_container"> -->
+      <img
+      class="rule_title_banner"
+      src="https://www.linkpicture.com/q/quiz_main.png"
+      alt="rocket_image"/>
+    <!-- </div> -->
+  </div>
     <%- include('partials/_footer') %>
   </body>
 </html>

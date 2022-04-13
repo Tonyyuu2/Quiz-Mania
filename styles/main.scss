@@ -26,14 +26,21 @@ ul[role="list"] {
   outline: none;
   border: none;
   font-size: 1rem;
-  border-radius: 0.3rem;
-  cursor: pointer;
   background: rgb(43, 110, 219);
   color: #ffffff;
+  border-radius: 15px;
+  box-shadow: 0 9px rgb(123, 123, 123);
+  text-align: center;
+  cursor: pointer;
+}
+
+.primary-btn:active {
+  box-shadow: 0 5px #666;
+  transform: translateY(5px);
 }
 
 .primary-btn:hover {
-  background: rgb(206, 135, 237);
+  background: rgb(123, 123, 123);
 }
 
 .flex-column {

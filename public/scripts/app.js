@@ -1,5 +1,3 @@
-// Client facing scripts here
-
 $(function() {
 
 
@@ -31,6 +29,7 @@ $(function() {
         $selectedOption.parent().css("background-color", "#FF7878");
         $(`input[value= "${result.answer}"]`).parent().css("background-color", "#97DBAE");
       }
+
       $('#check').addClass('hide');
       $('#next').removeClass('hide');
     });

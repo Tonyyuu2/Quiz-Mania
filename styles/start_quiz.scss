@@ -19,6 +19,17 @@
     rgb(255, 85, 85) 0px 0px 0px 15px;
 }
 
+.nav-margin {
+  display: flex;
+  justify-content: flex-start;
+}
+
+.rule_image_container {
+  display: flex;
+  justify-content: flex-end;
+  padding-right: 50px;
+}
+
 .rule_banner {
   height: 18rem;
 }
@@ -29,6 +40,11 @@
 
 .rule_btn {
   margin-top: 20px;
+}
+
+.rule_btn:active {
+  box-shadow: 0 5px #666;
+  transform: translateY(4px);
 }
 
 .rule_title_banner {
@@ -43,4 +59,6 @@
 
 .rule_quizname {
   margin: 0;
+  justify-content: flex-start;
+  // padding-left: 20px;
 }
