@@ -7,62 +7,63 @@
 
   <body>
     <%- include('partials/_header') %>
-    <form
-      id="question"
-      method="post"
-      action="/quiz-attempts/<%= quiz_id %>/questions/<%= id %>"
-    >
-      <div class="ques_container flex-column nav-margin">
-        <div class="ques_title flex-row">
-          <h1 class="ques_number">1.</h1>
-          <h2 class="ques"><%= question_desc %></h2>
-
+    <div class="ques_container flex-column nav-margin">
+      <div class="ques_title flex-row">
+        <h1 class="ques_number">1.</h1>
+        <h2 class="ques"><%= question_desc %></h2>
+      </div>
+      <div class="ques_options flex-row">
+        <div class="options">
+          <input
+            type="radio"
+            id="margotDisney"
+            name="option"
+            value="<%= option_1 %>"
+          />
+          <label for="margotDisney"><%= option_1 %></label>
         </div>
-        <div class="ques_options flex-row">
-          <div class="options">
-            <input
-              type="radio"
-              id="margotDisney"
-              name="option"
-              value="<%= option_1 %>"
-            />
-            <lable for="margotDisney"><%= option_1 %></lable>
-          </div>
-          <div class="options">
-            <input
-              type="radio"
-              id="waltDisney"
-              name="option"
-              value="<%= option_2 %>"
-            />
-            <lable for="waltDisney"><%= option_2 %></lable>
-          </div>
-          <div class="options">
-            <input
-              type="radio"
-              id="royDisney"
-              name="option"
-              value="<%= option_3 %>"
-            />
-            <lable for="royDisney"><%= option_3 %></lable>
-          </div>
-          <div class="options">
-            <input
-              type="radio"
-              id="maddoxDisney"
-              name="option"
-              value="<%= option_4 %>"
-            />
-            <lable for="maddoxDisney"><%= option_4 %></lable>
-          </div>
+        <div class="options">
+          <input
+            type="radio"
+            id="waltDisney"
+            name="option"
+            value="<%= option_2 %>"
+          />
+          <label for="waltDisney"><%= option_2 %></label>
         </div>
-        <div class="ques_btn">
-          <button type="submit" class="primary-btn check" value="submit">
-            Submit
-          </button>
+        <div class="options">
+          <input
+            type="radio"
+            id="royDisney"
+            name="option"
+            value="<%= option_3 %>"
+          />
+          <label for="royDisney"><%= option_3 %></label>
+        </div>
+        <div class="options">
+          <input
+            type="radio"
+            id="maddoxDisney"
+            name="option"
+            value="<%= option_4 %>"
+          />
+          <label for="maddoxDisney"><%= option_4 %></label>
         </div>
       </div>
-    </form>
+      <div class="ques_btn">
+        <button id="check" type="submit" class="primary-btn" value="submit">
+          Submit
+        </button>
+        <a
+          id="next"
+          href="/quiz-attempts/?qid=<%= quiz_id%>&que=<%= id + 1%>"
+          class="primary-btn hide"
+          value="submit"
+        >
+          Next
+        </a>
+      </div>
+    </div>
     <%- include('partials/_footer') %>
   </body>
 </html>
