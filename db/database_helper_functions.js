@@ -26,8 +26,8 @@ const getQuizFromUserURL = async (db, url) => { // function that renders the qui
   const qidPromise = await getQuizIdFromURL(db, url);
   const quizidFromURL = qidPromise.rows[0].id;
 
-  return db.query(`SELECT quizzes.title, quizzes.description, quizzes.id as quizId, 
-  questions.id as questionId FROM quizzes 
+  return db.query(`SELECT quizzes.title, quizzes.description, quizzes.id as quizId,
+  questions.id as questionId FROM quizzes
   JOIN questions ON questions.quiz_id = quizzes.id
   WHERE quizzes.id = $1`, [quizidFromURL]).then(result => {
     console.log(result.rows[0]);
@@ -110,7 +110,7 @@ exports.addTestResult = addTestResult;
 
 const getQuizData = (db, id) => {
 
-  return db.query(`SELECT questions.* FROM questions 
+  return db.query(`SELECT questions.* FROM questions
   JOIN quizzes ON quiz_id = quizzes.id
   WHERE quizzes.id = $1`, [id])
     .then(result => {
@@ -126,7 +126,7 @@ exports.getQuizData = getQuizData;
 
 const checkAnswer = (db, userInput, quizId, questionId) => {
 
-  return db.query(`SELECT answer FROM questions 
+  return db.query(`SELECT answer FROM questions
   JOIN quizzes ON quiz_id = quizzes.id
   WHERE quizzes.id = $1
   AND questions.id= $2`, [quizId, questionId])
@@ -148,6 +148,7 @@ const lastQuestionId = async (db, quizId) => {
   const lastQId = await db.query(`SELECT id FROM questions WHERE quiz_id = $1 ORDER BY id DESC`, [quizId]);
   return lastQId;
 };
+
 
 const getNextQuestion = async (db, quizId, questionId) => {
   const lastQIdP = await lastQuestionId(db, quizId);
@@ -215,5 +216,5 @@ const getQuizResult = async (db, quizId) => {
     .catch(err => console.log(err));
 
 };
-
 exports.getQuizResult = getQuizResult;
+

@@ -5,7 +5,6 @@ router.use(bodyParser.urlencoded({ extended: true }));
 
 const { addTestResult, getQuizResult, getQuizData, checkAnswer, getNextQuestion, insertUserAttempt } = require("../db/database_helper_functions");
 
-
 module.exports = (db) => {
   // /taking_tests
   router.get("/:id/result", (req, res) => {
@@ -69,4 +68,3 @@ module.exports = (db) => {
   }; // records the user's results and redirects them to a congratulations page
   return router;
 };
-
