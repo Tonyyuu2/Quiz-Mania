@@ -34,4 +34,26 @@ $(function() {
       $('#next').removeClass('hide');
     });
   });
+
+  let executeRocket = function (callback) {
+      $(".rocket_container").animate({
+        easing: "swing",
+        height: "2000px"
+      });
+      callback();
+  }
+
+  $('.startQuizButton').click(function () {
+    executeRocket();
+  })
+
+  $('.startQuizButton').click(function (e) {
+    e.preventDefault();
+    let startQuizLink = $(this).attr('href');
+    executeRocket(function () {
+      window.location.replace = startQuizLink;
+    })
+  })
+
 });
+

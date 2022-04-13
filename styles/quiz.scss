@@ -14,7 +14,7 @@
       #f5bee8,
       #f9e4f6
     );
-    padding: 1em 3em 2em;
+    padding: 1em 10em 3em;
   }
 
   &_header {
@@ -87,4 +87,10 @@
   border-radius: 2rem;
   background: rgb(227, 227, 227);
   padding: 5px;
+}
+
+.user_name1 {
+  color: rgb(250, 138, 157);
+  animation: revealText2 4s forwards;
+  animation-delay: 0.1s;
 }

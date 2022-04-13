@@ -8,15 +8,13 @@
     <%- include('partials/_header') %>
   <div class="rule-container">
     <div class="nav-margin flex-row rule_info">
-      <div>
-        <h2 class="rule_quizname">Quiz Name: <%= title %></h2>
-        <p>Description: <%= description %></p>
-      </div>
     </div>
 
     <div class="main_container flex-row">
       <div class="rule_container">
-        <h1 class="rule_title">Quiz Rules!</h1>
+        <h1 class="rule_quizname"> <%= title %></h1>
+        <p> <%= description %></p>
+        <h3 class="rule_title">Quiz Rules!</h3>
         <p>
           <i class="fa-solid fa-square-check"></i>Each multiple choice
           question has only one correct answer.
@@ -38,10 +36,10 @@
           result with other users by using the link provided at the end.
         </p>
         <p>
-          <i class="fa-solid fa-square-check"></i> Have fun! If you are stuck, call a mentor!
+          <i class="fa-solid fa-square-check"></i> Have fun! If you get stuck, call a quiz-mania mentor!
         </p>
-        <button class="primary-btn rule_btn">
-          <a href="/quiz-attempts/?qid=<%= quizid%>&que=<%= questionid%>">
+        <button class="primary-btn rule_btn" id="startQuiz" value="start">
+          <a class="startQuizButton" href="/quiz-attempts/?qid=<%= quizid%>&que=<%= questionid%>">
             Start Quiz
           </a>
         </button>
@@ -51,17 +49,13 @@
         src="https://www.linkpicture.com/q/leaderBoard.png"
         alt="leaderboard_img"
       /> -->
+      <div class="rocket_container" id="rocket">
       <img
       class="rule_title_banner"
       src="https://www.linkpicture.com/q/quiz_main.png"
       alt="rocket_image"/>
+      </div>
     </div>
-    <!-- <div class="rule_image_container"> -->
-      <img
-      class="rule_title_banner"
-      src="https://www.linkpicture.com/q/quiz_main.png"
-      alt="rocket_image"/>
-    <!-- </div> -->
   </div>
     <%- include('partials/_footer') %>
   </body>
