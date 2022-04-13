@@ -7,6 +7,7 @@
   width: 100%;
   justify-content: space-between;
   align-items: center;
+  z-index: 1000;
 }
 
 .logo {
@@ -15,6 +16,7 @@
   animation-duration: 2s;
   animation-iteration-count: infinite;
   transform-origin: bottom;
+  margin-top:5px;
 }
 
 .logo:hover {
