@@ -15,14 +15,30 @@ const getQuiz = (db, id) => {
 };
 exports.getQuiz = getQuiz;
 
-const getQuizFromUserURL = (db, url) => { // function that renders the quiz with a user URL
+const getQuizIdFromURL = async function(db, url) {
 
-  return db.query(`SELECT * FROM quizzes WHERE quizzes.url = $1`, [url]).then(result => {
+  const id = await db.query(`SELECT id FROM quizzes WHERE quizzes.url = $1`, [url]);
+  return id;
+
+};
+
+const getQuizFromUserURL = async (db, url) => { // function that renders the quiz with a user URL
+  const qidPromise = await getQuizIdFromURL(db, url);
+  const quizidFromURL = qidPromise.rows[0].id;
+  console.log(quizidFromURL);
+
+  return db.query(`SELECT quizzes.title, quizzes.description, quizzes.id as quizId, 
+  questions.id as questionId FROM quizzes 
+  JOIN questions ON questions.quiz_id = quizzes.id
+  WHERE quizzes.id = $1`, [quizidFromURL]).then(result => {
+    console.log(result.rows[0]);
     return (result.rows[0]);
   })
     .catch(err => {
       console.log(err);
     });
+
+
 };
 exports.getQuizFromUserURL = getQuizFromUserURL;
 
@@ -31,7 +47,7 @@ const addQuiz = (db, input) => {
   const { quiz_title, quiz_description, is_public } = input;
   const quizURL = generateRandomString();
 
-  return db.query(`INSERT INTO quizzes (user_id, public, description, url) VALUES ($1, $2, $3, $4) RETURNING *`, [1, is_public, quiz_description, quizURL]).then(result => {
+  return db.query(`INSERT INTO quizzes (user_id, public, description, title, url) VALUES ($1, $2, $3, $4, $5) RETURNING *`, [1, is_public, quiz_description, quiz_title, quizURL]).then(result => {
     return (result.rows[0].id);
   })
     .catch(err => {
@@ -128,3 +144,19 @@ const checkAnswer = (db, userInput, quizId, questionId) => {
 };
 
 exports.checkAnswer = checkAnswer;
+
+const getNextQuestion = (db, quizId, questionId) => {
+
+  return db.query(`SELECT questions.* FROM questions 
+  JOIN quizzes ON quiz_id = quizzes.id
+  WHERE quizzes.id = $1
+  AND questions.id= $2`, [quizId, questionId])
+    .then(result => {
+
+      return result.rows[0];
+    })
+    .catch(err => console.log(err));
+
+};
+
+exports.getNextQuestion = getNextQuestion;

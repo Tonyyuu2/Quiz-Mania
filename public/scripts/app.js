@@ -1,5 +1,8 @@
 // Client facing scripts here
+
 $(function() {
+
+
   $('#share').click(function(event) {
     event.preventDefault();
     const url = "http://localhost:8080" + $(this).attr("href");
@@ -8,24 +11,28 @@ $(function() {
 
   $('#check').click(function(e) {
     e.preventDefault();
+
+    const searchParams = new URLSearchParams(window.location.search);
+    searchParams.has('qid');
+    const qid = searchParams.get('qid');
+    const que = searchParams.get('que');
+
     const $selectedOption = $("input[name=option]:checked");
-    const myval = $selectedOption.val();
-    console.log("Initial value from jQuery", myval);
+    const userInput = $selectedOption.val();
     $.ajax({
       type: "GET",
-      url: '/quiz-attempts/1/questions/1',
-      data: { 'option': myval }
+      url: `/quiz-attempts/${qid}/questions/${que}/check`,
+      data: { 'option': userInput }
     }).then(function(result) {
       console.log(result);
       if (result.isTrue) {
-        $selectedOption.parent().css("background-color", "green");
+        $selectedOption.parent().css("background-color", "#97DBAE");
       } else {
-        $selectedOption.parent().css("background-color", "red");
-        $(`input[value= ${result.answer}]`).parent().css("background-color", "green");
+        $selectedOption.parent().css("background-color", "#FF7878");
+        $(`input[value= "${result.answer}"]`).parent().css("background-color", "#97DBAE");
       }
-      $('#check').val("Next");
-      $('#check').attr("id", "next");
-      $('#next').text("Next");
+      $('#check').addClass('hide');
+      $('#next').removeClass('hide');
     });
   });
 });

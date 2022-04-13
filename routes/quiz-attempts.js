@@ -3,7 +3,7 @@ const router = express.Router();
 const bodyParser = require('body-parser');
 router.use(bodyParser.urlencoded({ extended: true }));
 
-const { addTestResult, getQuizData, checkAnswer } = require("../db/database_helper_functions");
+const { addTestResult, getQuizData, checkAnswer, getNextQuestion } = require("../db/database_helper_functions");
 
 
 module.exports = (db) => {
@@ -22,13 +22,21 @@ module.exports = (db) => {
 
   });
 
-  router.get("/:quizId/questions/:queID", (req, res) => {
+  router.get("/", (req, res) => {
+    getNextQuestion(db, req.query.qid, req.query.que)
+      .then(result => {
+        res.render("2_2_display_question", result);
+      }).catch(err => {
+        console.log(err);
+      });
+  });
+
+  router.get("/:quizId/questions/:queID/check", (req, res) => {
     //console.log(JSON.stringify(req.body));
     console.log("---------------------------------", req.query.option);
     //console.log("---------------------------------", req.body.option, req.params.quizId, req.params.queID);
     checkAnswer(db, req.query.option, req.params.quizId, req.params.queID)
       .then(result => {
-        console.log(result);
         res.send(result);
       }).catch(err => {
         console.log(err);
