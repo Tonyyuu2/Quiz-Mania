@@ -25,7 +25,6 @@ const getQuizIdFromURL = async function(db, url) {
 const getQuizFromUserURL = async (db, url) => { // function that renders the quiz with a user URL
   const qidPromise = await getQuizIdFromURL(db, url);
   const quizidFromURL = qidPromise.rows[0].id;
-  console.log(quizidFromURL);
 
   return db.query(`SELECT quizzes.title, quizzes.description, quizzes.id as quizId,
   questions.id as questionId FROM quizzes
@@ -92,7 +91,7 @@ exports.getAllResults = getAllResults;
 
 const getMyAttempts = (db, id) => { // function that renders all the results of a particular user
 
-  return db.query(`SELECT quizzes.title, quiz_results.user_score,quiz_results.total_score, to_char( quiz_results.date,'Day Mon dd, yyyy HH12:MI AM') as date FROM quiz_results JOIN quizzes ON quizzes.id = quiz_id JOIN users ON users.id = quiz_results.user_id WHERE users.id = $1`, [id]).then(result => {
+  return db.query(`SELECT quizzes.title, quiz_results.user_score,quiz_results.total_score, to_char( quiz_results.date,'Day Mon dd, yyyy HH12:MI AM') as date FROM quiz_results JOIN quizzes ON quizzes.id = quiz_id JOIN users ON users.id = quiz_results.user_id WHERE users.id = $1 ORDER BY date DESC`, [id]).then(result => {
     return (result.rows); //
   }).catch(err => {
     console.log(err);
@@ -145,14 +144,22 @@ const checkAnswer = (db, userInput, quizId, questionId) => {
 
 exports.checkAnswer = checkAnswer;
 
-const getNextQuestion = (db, quizId, questionId) => {
+const lastQuestionId = async (db, quizId) => {
+  const lastQId = await db.query(`SELECT id FROM questions WHERE quiz_id = $1 ORDER BY id DESC`, [quizId]);
+  return lastQId;
+};
 
-  return db.query(`SELECT questions.* FROM questions
+
+const getNextQuestion = async (db, quizId, questionId) => {
+  const lastQIdP = await lastQuestionId(db, quizId);
+  const maxQId = lastQIdP.rows[0].id;
+  return db.query(`SELECT questions.* FROM questions 
   JOIN quizzes ON quiz_id = quizzes.id
   WHERE quizzes.id = $1
   AND questions.id= $2`, [quizId, questionId])
     .then(result => {
-
+      result.rows[0]['maxId'] = maxQId;
+      console.log(result.rows[0]);
       return result.rows[0];
     })
     .catch(err => console.log(err));
@@ -161,4 +168,53 @@ const getNextQuestion = (db, quizId, questionId) => {
 
 exports.getNextQuestion = getNextQuestion;
 
+
+
+const insertUserAttempt = (db, quizId, questionId, isTrue) => {
+
+  return db.query(`INSERT INTO quiz_attempts(user_id, quiz_id,question_id, is_true)
+  VALUES ($1, $2, $3, $4)
+  ON CONFLICT(question_id) DO UPDATE SET is_true = EXCLUDED.is_true RETURNING*;`, [1, quizId, questionId, isTrue])
+    .then(result => {
+      console.log(result.rows[0]);
+      return result.rows[0];
+    })
+    .catch(err => console.log(err));
+
+};
+
+exports.insertUserAttempt = insertUserAttempt;
+
+const getTotalQuestion = async (db, quizId) => {
+  const data = await db.query(`SELECT COUNT(question_id) as total FROM quiz_attempts
+   WHERE quiz_id = $1
+   GROUP BY quiz_id ;`, [quizId]);
+  return data;
+};
+
+const resultData = async (db, quizId) => {
+
+
+  const data = await db.query(`SELECT COUNT(quiz_attempts.is_true) as userscore, quizzes.title FROM quizzes JOIN quiz_attempts ON quiz_attempts.quiz_id = quizzes.id  WHERE quizzes.id = $1
+  AND quiz_attempts.is_true = 'true'
+  GROUP BY quizzes.id, quizzes.title;`, [quizId]);
+  return data;
+};
+
+const getQuizResult = async (db, quizId) => {
+  const totalQP = await getTotalQuestion(db, quizId);
+  const totalScore = totalQP.rows[0].total;
+  const qdataP = await resultData(db, quizId);
+  const { title, userscore } = qdataP.rows[0];
+
+  return db.query(`INSERT INTO quiz_results(user_id, quiz_id, user_score, total_score, result_url) VALUES($1, $2, $3, $4, $5) RETURNING *; `, [1, quizId, userscore, totalScore, generateRandomString()])
+    .then(result => {
+      result.rows[0].title = title;
+      console.log(result.rows[0]);
+      return result.rows[0];
+    })
+    .catch(err => console.log(err));
+
+};
+exports.getQuizResult = getQuizResult;
 
