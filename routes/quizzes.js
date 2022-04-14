@@ -10,7 +10,7 @@ const router = express.Router();
 const bodyParser = require('body-parser');
 router.use(bodyParser.urlencoded({ extended: true }));
 
-const { getQuiz, getQuizFromUserURL, addQuiz, addQuestion, getQuizRandomURL } = require("../db/database_helper_functions");
+const { addRandomQuestions, addRandomQuiz, getQuizFromUserURL, addQuiz, addQuestion, getQuizRandomURL } = require("../db/database_helper_functions");
 
 module.exports = (db) => {
   //quizzes/add
@@ -27,7 +27,17 @@ module.exports = (db) => {
       });
   });
 
-  //quizzes/u/:id
+  router.post("/random", (req, res) => {
+    const apiData = req.body.data.results;
+    console.log(apiData);
+    addRandomQuiz(db, apiData[0].category).then(quizId => {
+      addRandomQuestions(db, quizId, apiData).then(data => {
+        console.log(data);
+      });
+
+    });
+  });
+  //quizzes/u/:id 
   router.get("/u/:id", (req, res) => {
     getQuizFromUserURL(db, req.params.id).then(result => {
       const { title, description, quizid, questionid } = result;
