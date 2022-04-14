@@ -29,15 +29,15 @@ module.exports = (db) => {
 
   router.post("/random", (req, res) => {
     const apiData = req.body.data.results;
-    console.log(apiData);
+    console.log("--------------------", apiData);
     addRandomQuiz(db, apiData[0].category).then(quizId => {
       addRandomQuestions(db, quizId, apiData).then(data => {
-        console.log(data);
+        res.sendStatus(200);
       });
 
     });
   });
-  //quizzes/u/:id 
+  //quizzes/u/:id
   router.get("/u/:id", (req, res) => {
     getQuizFromUserURL(db, req.params.id).then(result => {
       const { title, description, quizid, questionid } = result;

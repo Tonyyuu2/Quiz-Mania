@@ -62,8 +62,6 @@ app.use("/quiz-attempts", quizAttempts(db));
 
 app.get("/", (req, res) => {
   db.query(`SELECT * FROM quizzes ORDER BY id DESC`).then(result => {
-    console.log({ quizzes: result.rows });
-    //const templateVars = result.rows[0];
     res.render("1_1_home", { quizzes: result.rows });
   });
 });

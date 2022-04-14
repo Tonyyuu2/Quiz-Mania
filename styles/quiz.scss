@@ -16,6 +16,13 @@
     padding: 2px 5em 20px;
   }
 
+  &_card_private {
+    margin: 1rem;
+    border-radius: 1rem;
+    padding: 1em 10em 3em;
+    background-image: linear-gradient(315deg, #f39f86 0%, #f9d976 74%);
+  }
+
   &_header {
     text-align: center;
     font-size: 1.5rem;
@@ -27,6 +34,8 @@
   }
 }
 
+
+=======
 .homeHeadingContainer {
   display: flex;
   justify-content: column;
@@ -43,7 +52,6 @@
   height: 10%;
   z-index: -1;
 }
-
 .nav-margin {
   align-items: center;
 }
@@ -89,9 +97,6 @@
   box-shadow: 0 5px #666;
   transform: translateY(4px);
 }
-
-
-
 
 .user_name {
   text-align: center;

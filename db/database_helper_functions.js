@@ -191,7 +191,7 @@ const getTotalQuestion = async (db, quizId) => {
     GROUP BY quiz_id ;`, [quizId]);
   return data;
 };
-  
+
 const resultData = async (db, quizId) => {
 
 
@@ -254,7 +254,7 @@ const getUserQuizResult = (db, quizURL) => {
     console.log('result.rows[0] :', result.rows[0]);
     return result.rows[0];
   })
-  .catch(err => console.log(err));
+    .catch(err => console.log(err));
 };
 exports.getUserQuizResult = getUserQuizResult;
 

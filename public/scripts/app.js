@@ -51,47 +51,47 @@ $(function() {
   });
 
 
-  let executeRocket = function (callback) {
-      $(".rocket_container").animate({
-        easing: "swing",
-        height: "1000px",
-        right: "500px",
-        opacity: "0.01"
-      });
-      window.setTimeout(callback, 800)
+  let executeRocket = function(callback) {
+    $(".rocket_container").animate({
+      easing: "swing",
+      height: "1000px",
+      right: "500px",
+      opacity: "0.01"
+    });
+    window.setTimeout(callback, 800);
 
-  }
+  };
 
-  $('#startQuiz').click(function (e) {
+  $('#startQuiz').click(function(e) {
     e.preventDefault();
     let startQuizLink = $(this).attr('data-url');
-    executeRocket(function () {
+    executeRocket(function() {
       console.log("callback", startQuizLink);
       window.location.href = startQuizLink;
-    })
-  })
+    });
+  });
 
   $('.generator').click(function(e) {
     e.preventDefault();
     const loadQuestion = async function() {
-      const APIUrl = 'https://opentdb.com/api.php?amount=5';
+      const APIUrl = 'https://opentdb.com/api.php?amount=5&type=multiple';
       const result = await fetch(`${APIUrl}`);
       const data = await result.json();
       return data;
     };
 
     loadQuestion().then((result) => {
-
       $.ajax({
         type: "POST",
         url: "/quizzes/random",
         data: { data: result }
+      }).then(() => {
+        window.location.reload();
       });
 
     }
     );
   });
-
   //styling and popout menu------------------
 
 

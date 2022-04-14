@@ -53,7 +53,9 @@
           <p class="quiz_header">Generated Quizzes</p>
         </div>
         <% for(const quiz of quizzes) { %>
-        <div class="quiz_card text-center">
+        <div
+          class="<%= quiz.public ? 'quiz_card': 'quiz_card_private' %> text-center"
+        >
           <h4><%=quiz.title%></h4>
           <h5><%=quiz.description%></h5>
           <a class="primary-btn" href="/quizzes/u/<%=quiz.url%>">Attempt</a>
