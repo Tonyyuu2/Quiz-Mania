@@ -7,17 +7,20 @@
 
   <body>
     <%- include('partials/_header') %>
+  <div class="mainQuizResultContainer">
     <div class="result_container flex-column nav-margin">
       <div class="success_msg">🎉Congratulation for completing this quiz😇</div>
       <div class="quiz_desc">Quiz Name: <%= title%></div>
       <div class="score">Your score: <%= user_score%> / <%= total_score%></div>
       <div class="share_btn">
         <a class="primary-btn share" href="/results/<%=result_url%>"
-          >Share your result</a
-        >
+          >Share your result</a>
+
         <a class="primary-btn" href="/">Take another quiz</a>
       </div>
     </div>
+  </div>
+</div>
     <%- include('partials/_footer') %>
   </body>
 </html>
