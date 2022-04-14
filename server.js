@@ -61,9 +61,7 @@ app.use("/quiz-attempts", quizAttempts(db));
 // Separate them into separate routes files (see above).
 
 app.get("/", (req, res) => {
-  db.query(`SELECT * FROM quizzes`).then(result => {
-    console.log({ quizzes: result.rows });
-    //const templateVars = result.rows[0];
+  db.query(`SELECT * FROM quizzes ORDER BY id DESC`).then(result => {
     res.render("1_1_home", { quizzes: result.rows });
   });
 });

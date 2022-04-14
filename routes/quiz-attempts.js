@@ -37,14 +37,16 @@ module.exports = (db) => {
   router.get("/", (req, res) => {
     getNextQuestion(db, req.query.qid, req.query.que)
       .then(result => {
-        res.render("2_2_display_question", result);
+        const { option_1, option_2, option_3, option_4 } = result;
+        const options = [option_1, option_2, option_3, option_4];
+        options.sort();
+        res.render("2_2_display_question", { result, options });
       }).catch(err => {
         console.log(err);
       });
   });
 
   router.get("/:quizId/questions/:queID/check", (req, res) => {
-
     checkAnswer(db, req.query.option, req.params.quizId, req.params.queID)
       .then(result => {
         res.send(result);

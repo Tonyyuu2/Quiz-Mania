@@ -10,34 +10,34 @@
     <div class="ques_container flex-column nav-margin">
       <div class="ques_title flex-row">
         <h1 class="ques_number">1.</h1>
-        <h2 class="ques"><%= question_desc %></h2>
+        <h2 class="ques"><%= result.question_desc %></h2>
       </div>
       <div class="ques_options flex-row">
         <div class="options">
-          <input type="radio" name="option" value="<%= option_1 %>" />
-          <label for="<%= option_1 %>"><%= option_1 %></label>
+          <input type="radio" name="option" value="<%= options[0] %>" />
+          <label for="<%=options[0] %>"><%= options[0] %></label>
         </div>
         <div class="options">
-          <input type="radio" name="option" value="<%= option_2 %>" />
-          <label for="<%= option_2 %>"><%= option_2 %></label>
+          <input type="radio" name="option" value="<%= options[1] %>" />
+          <label for="<%= options[1] %>"><%= options[1] %></label>
         </div>
         <div class="options">
-          <input type="radio" name="option" value="<%= option_3 %>" />
-          <label for="<%= option_3 %>"><%= option_3 %></label>
+          <input type="radio" name="option" value="<%= options[2] %>" />
+          <label for="<%= options[2] %>"><%= options[2] %></label>
         </div>
         <div class="options">
-          <input type="radio" name="option" value="<%= option_4 %>" />
-          <label for="<%= option_4 %>"><%= option_4 %></label>
+          <input type="radio" name="option" value="<%= options[3] %>" />
+          <label for="<%= options[3] %>"><%= options[3] %></label>
         </div>
       </div>
       <div class="ques_btn">
         <button id="check" type="submit" class="primary-btn" value="submit">
           Submit
         </button>
-        <a id="next" <% if(id < maxId){%>
-          href="/quiz-attempts/?qid=<%= quiz_id%>&que=<%= id + 1%>" <% } else{%>
-          href="/quiz-attempts/<%= quiz_id%>/result" <% }%> class="primary-btn
-          hide" > Next
+        <a id="next" <% if(result.id < result.maxId){%>
+          href="/quiz-attempts/?qid=<%= result.quiz_id%>&que=<%= result.id +
+          1%>" <% } else{%> href="/quiz-attempts/<%= result.quiz_id%>/result" <%
+          }%> class="primary-btn hide" > Next
         </a>
       </div>
     </div>
