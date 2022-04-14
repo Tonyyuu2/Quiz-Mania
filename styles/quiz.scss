@@ -5,7 +5,6 @@
   &_card {
     margin: 1rem;
     border-radius: 1rem;
-    background-color: #df8ff5;
     background-image: linear-gradient(
       to right top,
       #d0c4ed,
@@ -35,6 +34,8 @@
 
 .user_name1 {
   padding-left: 5px;
+  animation: revealText 1s forwards;
+  animation-delay: 0.4s;
 }
 
 

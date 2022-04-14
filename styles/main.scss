@@ -65,6 +65,7 @@ ul[role="list"] {
 .welcome {
   float: left;
   padding: 5px;
+  animation-name: revealText1;
 }
 
 @keyframes revealText {
@@ -106,19 +107,7 @@ i {
   display: none;
 }
 
-// .rocketAnimation {
-//   transform: translateX (50%);
-//   animation: fly 2s ease-in;
-// }
-
-// @keyframes fly {
-
-
-//   0% {
-//     color: red;
-//   }
-
-//   // 100% {
-//   //   transform: translate (-50%, 100vh);
-//   // }
-// }
+.share1 {
+  background-color: white;
+  color: black,
+}
