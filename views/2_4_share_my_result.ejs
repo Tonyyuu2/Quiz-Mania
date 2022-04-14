@@ -1,21 +1,20 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <title>QuizMania - Result</title>
+    <title>QuizMania - Share_Result</title>
     <link rel="stylesheet" href="/styles/result.css" type="text/css" />
   </head>
 
   <body>
     <%- include('partials/_header') %>
     <div class="result_container flex-column nav-margin">
-      <div class="success_msg">🎉Congratulation for completing this quiz😇</div>
+      <div class="success_msg">🎉<%= name %> completed this quiz!😇</div>
       <div class="quiz_desc">Quiz Name: <%= title%></div>
-      <div class="score">Your score: <%= user_score%> / <%= total_score%></div>
+      <div class="score">They tested: <%= user_score%> / <%= total_score%></div>
       <div class="share_btn">
-        <a class="primary-btn share" href="/results/<%=result_url%>"
-          >Share your result</a
+        <a class="primary-btn share" href="/quizzes/u/<%=url%>"
+          >Take the quiz!</a
         >
-        <a class="primary-btn" href="/">Take another quiz</a>
       </div>
     </div>
     <%- include('partials/_footer') %>

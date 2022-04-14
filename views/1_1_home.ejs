@@ -22,9 +22,25 @@
           <i class="fa-solid fa-user"></i>
           <p class="quiz_header">My quizzes</p>
         </div>
+        <div class="quiz_card text-center">
+          <h4>Create a random quiz</h4>
+          <h5>This is test</h5>
+          <a
+            class="primary-btn generator"
+            href="https://opentdb.com/api.php?amount=10"
+            >Generate Quiz</a
+          >
+        </div>
+      </Section>
+      <Section class="quiz_my_quizzes">
+        <div class="quizheader">
+          <i class="fa-solid fa-user"></i>
+          <p class="quiz_header">My quizzes</p>
+        </div>
         <% for(const quiz of quizzes) { %>
         <div class="quiz_card text-center">
           <h4><%=quiz.title%></h4>
+          <h5><%=quiz.description%></h5>
           <a class="primary-btn" href="/quizzes/u/<%=quiz.url%>">Attempt</a>
         </div>
         <% } %>
@@ -37,6 +53,7 @@
         <% for(const quiz of quizzes) { %>
         <div class="quiz_card text-center">
           <h4><%=quiz.title%></h4>
+          <h5><%=quiz.description%></h5>
           <a class="primary-btn" href="/quizzes/u/<%=quiz.url%>">Attempt</a>
         </div>
         <% } %>
