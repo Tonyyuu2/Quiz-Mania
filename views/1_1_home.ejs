@@ -12,30 +12,45 @@
   <body>
     <%- include('partials/_header') %>
 
+  <div class="homeHeadingContainer flex-column">
     <div class="user_name nav-margin">
       <div class="welcome">Welcome</div>
       <div class="user_name1">Johnny Smith</div>
     </div>
-    <div class="quiz">
-      <Section class="quiz_my_quizzes">
-        <div class="quizheader">
-          <i class="fa-solid fa-user"></i>
-          <p class="quiz_header">My quizzes</p>
-        </div>
-        <div class="quiz_card text-center">
-          <h4>Create a random quiz</h4>
-          <h5>This is test</h5>
+
+
+    <div class="randomQuizContainer">
+        <h4 class="randomHeading">Get Started Now!</h4>
           <a
-            class="primary-btn generator"
-            href="https://opentdb.com/api.php?amount=10"
-            >Generate Quiz</a
-          >
-        </div>
+          class="primary-btn generator"
+          href="https://opentdb.com/api.php?amount=10"
+          >Generate Quiz
+        </a>
+    </div>
+  </div>
+
+
+    <div class="quiz">
+
       </Section>
       <Section class="quiz_my_quizzes">
         <div class="quizheader">
-          <i class="fa-solid fa-user"></i>
-          <p class="quiz_header">My quizzes</p>
+          <i class="fa-solid fa-user" id="userIcon"></i>
+          <p class="quiz_header">My Quizzes</p>
+        </div>
+        <% for(const quiz of quizzes) { %>
+        <div class="quiz_card text-center">
+          <h4><%=quiz.title%></h4>
+          <h5><%=quiz.description%></h5>
+          <a class="primary-btn" href="/quizzes/u/<%=quiz.url%>">Attempt</a>
+        </div>
+        <% } %>
+      </Section>
+      </Section>
+      <Section class="quiz_my_quizzes">
+        <div class="quizheader">
+          <i class="fa-solid fa-shuffle"></i>
+          <p class="quiz_header">Generated Quizzes</p>
         </div>
         <% for(const quiz of quizzes) { %>
         <div class="quiz_card text-center">
@@ -48,7 +63,7 @@
       <Section class="quiz_featured_quizzes">
         <div class="quizheader">
           <i class="fa-solid fa-star" id="star"></i>
-          <p class="quiz_header">Featured quizzes</p>
+          <p class="quiz_header">Featured Quizzes</p>
         </div>
         <% for(const quiz of quizzes) { %>
         <div class="quiz_card text-center">
@@ -59,6 +74,7 @@
         <% } %>
       </Section>
     </div>
+  </div>
     <%- include('partials/_footer') %>
   </body>
 </html>
