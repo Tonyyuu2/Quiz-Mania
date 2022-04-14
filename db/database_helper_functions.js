@@ -125,11 +125,11 @@ const getQuizData = (db, id) => {
 exports.getQuizData = getQuizData;
 
 const checkAnswer = (db, userInput, quizId, questionId) => {
-
   return db.query(`SELECT answer FROM questions 
     JOIN quizzes ON quiz_id = quizzes.id
     WHERE quizzes.id = $1
     AND questions.id= $2`, [quizId, questionId])
+
     .then(result => {
       if (result.rows[0].answer === userInput) {
         return { isTrue: true };
@@ -149,22 +149,23 @@ const lastQuestionId = async (db, quizId) => {
   return lastQId;
 };
 
+
 const getNextQuestion = async (db, quizId, questionId) => {
   const lastQIdP = await lastQuestionId(db, quizId);
+  console.log('lastQIdP :', lastQIdP);
   const maxQId = lastQIdP.rows[0].id;
+
   return db.query(`SELECT questions.* FROM questions 
     JOIN quizzes ON quiz_id = quizzes.id
     WHERE quizzes.id = $1
     AND questions.id= $2`, [quizId, questionId])
     .then(result => {
       result.rows[0]['maxId'] = maxQId;
-      console.log(result.rows[0]);
+      console.log('-------', result.rows[0]);
       return result.rows[0];
     })
     .catch(err => console.log(err));
-
 };
-
 exports.getNextQuestion = getNextQuestion;
 
 
@@ -190,7 +191,7 @@ const getTotalQuestion = async (db, quizId) => {
     GROUP BY quiz_id ;`, [quizId]);
   return data;
 };
-
+  
 const resultData = async (db, quizId) => {
 
 
@@ -215,6 +216,7 @@ const getQuizResult = async (db, quizId) => {
     .catch(err => console.log(err));
 
 };
+exports.getQuizResult = getQuizResult;
 
 exports.getQuizResult = getQuizResult;
 
@@ -245,3 +247,14 @@ const addRandomQuestions = async (db, quizId, apiData) => {
 };
 
 exports.addRandomQuestions = addRandomQuestions;
+
+const getUserQuizResult = (db, quizURL) => {
+
+  return db.query(`SELECT * FROM quiz_results JOIN quizzes ON quiz_id = quizzes.id JOIN users ON users.id = quiz_results.user_id WHERE result_url = $1;`, [quizURL]).then(result => {
+    console.log('result.rows[0] :', result.rows[0]);
+    return result.rows[0];
+  })
+  .catch(err => console.log(err));
+};
+exports.getUserQuizResult = getUserQuizResult;
+
