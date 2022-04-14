@@ -83,6 +83,11 @@
       // font-size: 190px;
 }
 
+.mainQuizResultContainer {
+  position: relative;
+}
+
+//Quiz name gradient animation
 @keyframes textclip {
   to {
     background-position: 200% center;
@@ -93,3 +98,4 @@
   position: absolute;
   padding-left: 800px;
 }
+
