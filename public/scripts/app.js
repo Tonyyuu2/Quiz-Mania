@@ -82,9 +82,6 @@ $(function() {
   //   $('primary-btn share').addClass('share1');
   // })
 
-});
-
-
   /* =========Trying out the API things====== */
   $('.generator').click(function(e) {
     e.preventDefault();
@@ -106,7 +103,10 @@ $(function() {
     }
     );
   });
-
-
 });
+
+
+
+
+// });
 
