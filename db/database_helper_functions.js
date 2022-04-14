@@ -152,20 +152,20 @@ const lastQuestionId = async (db, quizId) => {
 
 const getNextQuestion = async (db, quizId, questionId) => {
   const lastQIdP = await lastQuestionId(db, quizId);
+  console.log('lastQIdP :', lastQIdP);
   const maxQId = lastQIdP.rows[0].id;
-  return db.query(`SELECT questions.* FROM questions 
+  console.log('maxQId :', maxQId);
+  return db.query(`SELECT questions.* FROM questions
   JOIN quizzes ON quiz_id = quizzes.id
   WHERE quizzes.id = $1
   AND questions.id= $2`, [quizId, questionId])
     .then(result => {
       result.rows[0]['maxId'] = maxQId;
-      console.log(result.rows[0]);
+      console.log('-------', result.rows[0]);
       return result.rows[0];
     })
     .catch(err => console.log(err));
-
 };
-
 exports.getNextQuestion = getNextQuestion;
 
 
@@ -187,8 +187,8 @@ exports.insertUserAttempt = insertUserAttempt;
 
 const getTotalQuestion = async (db, quizId) => {
   const data = await db.query(`SELECT COUNT(question_id) as total FROM quiz_attempts
-   WHERE quiz_id = $1
-   GROUP BY quiz_id ;`, [quizId]);
+  WHERE quiz_id = $1
+  GROUP BY quiz_id ;`, [quizId]);
   return data;
 };
 
@@ -218,3 +218,12 @@ const getQuizResult = async (db, quizId) => {
 };
 exports.getQuizResult = getQuizResult;
 
+const getUserQuizResult = (db, quizURL) => {
+
+  return db.query(`SELECT * FROM quiz_results JOIN quizzes ON quiz_id = quizzes.id JOIN users ON users.id = quiz_results.user_id WHERE result_url = $1;`, [quizURL]).then(result => {
+    console.log('result.rows[0] :', result.rows[0]);
+    return result.rows[0];
+  })
+  .catch(err => console.log(err));
+};
+exports.getUserQuizResult = getUserQuizResult;
