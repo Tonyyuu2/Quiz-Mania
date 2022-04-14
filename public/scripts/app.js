@@ -50,6 +50,41 @@ $(function() {
     });
   });
 
+
+  let executeRocket = function (callback) {
+      $(".rocket_container").animate({
+        easing: "swing",
+        height: "1000px",
+        right: "500px",
+        opacity: "0.01"
+      });
+      window.setTimeout(callback, 800)
+
+  }
+
+  $('#startQuiz').click(function (e) {
+    e.preventDefault();
+    let startQuizLink = $(this).attr('data-url');
+    executeRocket(function () {
+      console.log("callback", startQuizLink);
+      window.location.href = startQuizLink;
+    })
+  })
+
+
+  // $('primary-btn share').click(function (e) {
+  //   e.preventDefault();
+  //   navigator.clipboard.writeText("href").then(function() {
+  //     /* clipboard successfully set */
+  //   }, function() {
+  //     /* clipboard write failed */
+  //   });
+  //   $('primary-btn share').addClass('share1');
+  // })
+
+});
+
+
   /* =========Trying out the API things====== */
   $('.generator').click(function(e) {
     e.preventDefault();
@@ -74,3 +109,4 @@ $(function() {
 
 
 });
+
