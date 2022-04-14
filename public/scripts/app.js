@@ -49,4 +49,28 @@ $(function() {
       $('#next').removeClass('hide');
     });
   });
+
+  /* =========Trying out the API things====== */
+  $('.generator').click(function(e) {
+    e.preventDefault();
+    const loadQuestion = async function() {
+      const APIUrl = 'https://opentdb.com/api.php?amount=5';
+      const result = await fetch(`${APIUrl}`);
+      const data = await result.json();
+      return data;
+    };
+
+    loadQuestion().then((result) => {
+
+      $.ajax({
+        type: "POST",
+        url: "/quizzes/random",
+        data: { data: result }
+      });
+
+    }
+    );
+  });
+
+
 });
