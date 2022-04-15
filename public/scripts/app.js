@@ -4,7 +4,6 @@ $(function() {
   $('#share').click(function(event) {
     event.preventDefault();
     const url = "http://localhost:8080" + $(this).attr("href");
-    console.log(url);
   });
 
   $('#check').click(function(e) {
@@ -16,8 +15,6 @@ $(function() {
     const queid = searchParams.get('que');
 
     const addAttmept = function(qid, queid, isTrue) {
-
-      console.log("From post request", qid, queid, isTrue);
 
       $.ajax({
         type: "POST",
@@ -34,9 +31,7 @@ $(function() {
       url: `/quiz-attempts/${qid}/questions/${queid}/check`,
       data: { 'option': userInput }
     }).then(function(result) {
-      console.log("From get request", qid, queid, result.isTrue);
       addAttmept(qid, queid, result.isTrue);
-      console.log(result);
 
       if (result.isTrue) {
         $selectedOption.parent().css("background-color", "#97DBAE");
@@ -50,7 +45,6 @@ $(function() {
     });
   });
 
-
   let executeRocket = function(callback) {
     $(".rocket_container").animate({
       easing: "swing",
@@ -59,14 +53,12 @@ $(function() {
       opacity: "0.01"
     });
     window.setTimeout(callback, 800);
-
   };
 
   $('#startQuiz').click(function(e) {
     e.preventDefault();
     let startQuizLink = $(this).attr('data-url');
     executeRocket(function() {
-      console.log("callback", startQuizLink);
       window.location.href = startQuizLink;
     });
   });
@@ -92,27 +84,8 @@ $(function() {
     }
     );
   });
-  //styling and popout menu------------------
 
-
-  $(function() {
-    $( ".share_btn" ).dialog();
-  });
-
-
-
-    // $('primary-btn share').click(function (e) {
-  //   e.preventDefault();
-  //   navigator.clipboard.writeText("href").then(function() {
-  //     /* clipboard successfully set */
-  //   }, function() {
-  //     /* clipboard write failed */
-  //   });
-  //   $('primary-btn share').addClass('share1');
-  // })
-
-  /* =========Trying out the API things====== */
-
+  //for styling
   //background animation
 
 const colors = ["#3CC157", "#2AA7FF", "#1B1B1B", "#FCBC0F", "#F85F36"];
@@ -158,7 +131,6 @@ balls.forEach((el, i, ra) => {
 });
 
 //confetti
-console.log('confetti-------', window.confetti)
 const Confettiful = function (el) {
   this.el = el;
   this.containerEl = null;
@@ -219,12 +191,7 @@ Confettiful.prototype._renderConfetti = function () {
     }
   }, 25);
 };
-
 window.confettiful = new Confettiful(document.querySelector(".mainQuizResultContainer"));
-
-console.log('confetti-------', window.confetti, document.querySelector('.mainQuizResultContainer'))
-
-
 });
 
 

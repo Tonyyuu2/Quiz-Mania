@@ -13,14 +13,14 @@ router.use(bodyParser.urlencoded({ extended: true }));
 const { addRandomQuestions, addRandomQuiz, getQuizFromUserURL, addQuiz, addQuestion, getQuizRandomURL } = require("../db/database_helper_functions");
 
 module.exports = (db) => {
-  //quizzes/add
+
   router.get("/add", (req, res) => {
-    res.render("1_2_create_quiz"); //redirects user to page where user creates the quiz (not questions) // change render page
+    res.render("1_2_create_quiz");
   });
 
   router.post("/add", (req, res) => {
     addQuiz(db, req.body).then(result => {
-      res.redirect(`/questions/${result}/add`); //redirect happens here
+      res.redirect(`/questions/${result}/add`);
     })
       .catch(err => {
         console.log(err);
@@ -34,10 +34,9 @@ module.exports = (db) => {
       addRandomQuestions(db, quizId, apiData).then(data => {
         res.sendStatus(200);
       });
-
     });
   });
-  //quizzes/u/:id
+
   router.get("/u/:id", (req, res) => {
     getQuizFromUserURL(db, req.params.id).then(result => {
       const { title, description, quizid, questionid } = result;
@@ -46,7 +45,6 @@ module.exports = (db) => {
       console.log(err);
     });
   });
-
 
   router.post("/:id/view", (req, res) => {
     const quizId = req.params.id;

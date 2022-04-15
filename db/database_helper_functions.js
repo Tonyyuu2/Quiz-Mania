@@ -218,8 +218,6 @@ const getQuizResult = async (db, quizId) => {
 };
 exports.getQuizResult = getQuizResult;
 
-exports.getQuizResult = getQuizResult;
-
 const addRandomQuiz = (db, data) => {
 
   return db.query(`INSERT INTO quizzes(user_id, public, description, title, url)
