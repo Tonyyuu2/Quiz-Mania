@@ -26,8 +26,8 @@ const getQuizFromUserURL = async (db, url) => { // function that renders the qui
   const qidPromise = await getQuizIdFromURL(db, url);
   const quizidFromURL = qidPromise.rows[0].id;
 
-  return db.query(`SELECT quizzes.title, quizzes.description, quizzes.id as quizId, 
-    questions.id as questionId FROM quizzes 
+  return db.query(`SELECT quizzes.title, quizzes.description, quizzes.id as quizId,
+    questions.id as questionId FROM quizzes
     JOIN questions ON questions.quiz_id = quizzes.id
     WHERE quizzes.id = $1`, [quizidFromURL]).then(result => {
     console.log(result.rows[0]);
@@ -110,7 +110,7 @@ exports.addTestResult = addTestResult;
 
 const getQuizData = (db, id) => {
 
-  return db.query(`SELECT questions.* FROM questions 
+  return db.query(`SELECT questions.* FROM questions
     JOIN quizzes ON quiz_id = quizzes.id
     WHERE quizzes.id = $1`, [id])
     .then(result => {
@@ -125,7 +125,7 @@ const getQuizData = (db, id) => {
 exports.getQuizData = getQuizData;
 
 const checkAnswer = (db, userInput, quizId, questionId) => {
-  return db.query(`SELECT answer FROM questions 
+  return db.query(`SELECT answer FROM questions
     JOIN quizzes ON quiz_id = quizzes.id
     WHERE quizzes.id = $1
     AND questions.id= $2`, [quizId, questionId])
@@ -155,7 +155,7 @@ const getNextQuestion = async (db, quizId, questionId) => {
   console.log('lastQIdP :', lastQIdP);
   const maxQId = lastQIdP.rows[0].id;
 
-  return db.query(`SELECT questions.* FROM questions 
+  return db.query(`SELECT questions.* FROM questions
     JOIN quizzes ON quiz_id = quizzes.id
     WHERE quizzes.id = $1
     AND questions.id= $2`, [quizId, questionId])
@@ -258,3 +258,38 @@ const getUserQuizResult = (db, quizURL) => {
 };
 exports.getUserQuizResult = getUserQuizResult;
 
+const getUserQuizzes = async (db) => {
+
+  const userQuizData = await db.query(`SELECT * FROM quizzes JOIN users ON users.id = user_id WHERE users.id = $1 AND quizzes.description NOT LIKE '%Random generated%' AND quizzes.public = 'TRUE' GROUP BY users.id, quizzes.id HAVING quizzes.id > 3 ORDER BY quizzes.id DESC;`, [1]);
+
+  return userQuizData;
+};
+
+const getFeaturedQuizzes = async (db) => {
+
+  const featuredQuizData = await db.query(`SELECT * FROM quizzes JOIN users ON users.id = user_id WHERE users.id = $1 GROUP BY users.id, quizzes.id HAVING quizzes.id < 4 ORDER BY quizzes.id DESC`, [1]);
+
+  return featuredQuizData;
+};
+
+const getRandomQuizzes = async (db) => {
+
+  const randomQuizData = await db.query(`SELECT * FROM quizzes WHERE quizzes.description = 'Random generated quiz' ORDER BY quizzes.id DESC;`);
+
+  return randomQuizData
+};
+
+const threeColumnQuizzes = async (db) => {
+  const userQuiz = await getUserQuizzes(db);
+  const userQuizzes = userQuiz.rows;
+
+  const featuredQuiz = await getFeaturedQuizzes(db);
+  const featuredQuizzes = featuredQuiz.rows;
+
+  const randomQuiz = await getRandomQuizzes(db);
+  const randomQuizzes = randomQuiz.rows;
+
+  return { userQuizzes, featuredQuizzes, randomQuizzes };
+};
+
+exports.threeColumnQuizzes = threeColumnQuizzes;
