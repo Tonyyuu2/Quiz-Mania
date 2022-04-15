@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <script
+      src="https://kit.fontawesome.com/yourcode.js"
+      crossorigin="anonymous"
+    ></script>
+    <title>QuizMania - View My Quizzes</title>
+    <link rel="stylesheet" href="/styles/quiz.css" type="text/css" />
+  </head>
+
+  <body>
+    <%- include('partials/_header') %>
+
+    <div class="quiz nav-margin">
+      <Section class="quiz_my_quizzes">
+        <div class="quizheader">
+          <i class="fa-solid fa-user"></i>
+          <p class="quiz_header">My quizzes</p>
+        </div>
+        <% for(const quiz of quizzes) { %>
+        <div
+          class="<%= quiz.public ? 'quiz_card': 'quiz_card_private' %> text-center flex-row edit-quiz"
+        >
+          <h4><%=quiz.title%></h4>
+          <h5><%=quiz.description%></h5>
+          <a class="primary-btn" href="/quizzes/<%=quiz.url%>/edit">Edit</a>
+        </div>
+        <% } %>
+      </Section>
+    </div>
+    <%- include('partials/_footer') %>
+  </body>
+</html>
