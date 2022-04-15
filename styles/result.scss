@@ -12,15 +12,14 @@
   text-align: center;
   background: linear-gradient(
     124deg,
-    #ff2400,
-    #e81d1d,
-    #e8b71d,
-    #e3e81d,
-    #1de840,
-    #1ddde8,
-    #2b1de8,
-    #dd00f3,
-    #dd00f3
+    #5e98fc,
+    #89b3fc,
+    #4681e8,
+    #6898eb,
+    #83a8e8,
+    #33a4ac,
+    #6fd4eb,
+    #9bd1f2
   );
   color: #ffffff;
   background-size: 1800% 1800%;
@@ -153,5 +152,52 @@
 }
 .confetti--animation-fast {
   animation: confetti-fast 1.25s linear 1 forwards;
+}
+
+dialog {
+  padding: 100px;
+  margin-top: 170px;
+  border-radius: 2rem;
+  border-color: transparent;
+  backdrop-filter: blur(13px);
+  background-color: transparent;
+}
+
+dialog > share_url {
+  padding-bottom: 40px;
+}
+
+p {
+  padding-bottom: 30px;
+  font-size: 1.3em;
+  font-weight: bold;
+  color: white;
+}
+
+.share_url {
+  padding: 8px;
+  border: solid 2px rgb(215, 215, 215);
+  box-shadow: 6px 6px 6px rgb(62, 62, 62);
+  color: white;
+}
+
+dialog button {
+  padding: 0.5rem 1.2rem;
+  outline: none;
+  border: none;
+  font-size: 1rem;
+  background: rgb(43, 110, 219);
+  color: #ffffff;
+  border-radius: 15px;
+  text-align: center;
+  cursor: pointer;
+}
+
+.popUpButton {
+  padding-top: 60px;
+}
+
+.complete {
+  color: rgb(69, 245, 69);
 }
 
