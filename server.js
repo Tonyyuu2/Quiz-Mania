@@ -16,6 +16,8 @@ const dbParams = require("./lib/db.js");
 const db = new Pool(dbParams);
 db.connect();
 
+
+// loading packages
 app.use(morgan("dev"));
 app.use(cookieSession({
   name: 'session',
@@ -36,7 +38,6 @@ app.use(
 
 app.use(express.static("public"));
 
-
 const quizzesRoutes = require("./routes/quizzes");
 const questionsRoutes = require("./routes/questions");
 const resultsRoutes = require("./routes/results");
@@ -45,6 +46,7 @@ const quizAttempts = require("./routes/quiz-attempts");
 const { threeColumnQuizzes } = require("./db/database_helper_functions");
 
 
+// Mount all resource routes
 app.use("/quizzes", quizzesRoutes(db));
 app.use("/questions", questionsRoutes(db));
 app.use("/results", resultsRoutes(db));
@@ -52,9 +54,9 @@ app.use("/my_attempts", myAttempts(db));
 app.use("/quiz-attempts", quizAttempts(db));
 
 
+// Home page
 app.get("/", (req, res) => {
   threeColumnQuizzes(db).then(result => {
-  console.log('result------------- :', result);
     res.render("1_1_home", result)
   })
   .catch(err => {
@@ -62,6 +64,6 @@ app.get("/", (req, res) => {
   })
 });
 
-app.listen(PORT, () => {
+app.listen(process.env.PORT || PORT, () => {
   console.log(`Example app listening on port ${PORT}`);
 });

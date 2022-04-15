@@ -11,8 +11,7 @@ module.exports = (db) => {
     getUserQuizResult(db, req.params.result_url).then(result => {
       const { url, user_score, total_score, name, title } = result;
       res.render("2_4_share_my_result",{ url, user_score, total_score, name, title });
-    })
-  })
-
+    });
+  });
   return router;
 };

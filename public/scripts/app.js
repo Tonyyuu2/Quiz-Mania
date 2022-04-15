@@ -4,7 +4,6 @@ $(function() {
   $('#share').click(function(event) {
     event.preventDefault();
     const url = "http://localhost:8080" + $(this).attr("href");
-    console.log(url);
   });
 
   $('#check').click(function(e) {
@@ -16,8 +15,6 @@ $(function() {
     const queid = searchParams.get('que');
 
     const addAttmept = function(qid, queid, isTrue) {
-
-      console.log("From post request", qid, queid, isTrue);
 
       $.ajax({
         type: "POST",
@@ -35,6 +32,7 @@ $(function() {
       data: { 'option': userInput }
     }).then(function(result) {
       addAttmept(qid, queid, result.isTrue);
+
       if (result.isTrue) {
         $selectedOption.parent().css("background-color", "#97DBAE");
       } else {
@@ -47,7 +45,6 @@ $(function() {
     });
   });
 
-
   let executeRocket = function(callback) {
     $(".rocket_container").animate({
       easing: "swing",
@@ -56,14 +53,12 @@ $(function() {
       opacity: "0.01"
     });
     window.setTimeout(callback, 800);
-
   };
 
   $('#startQuiz').click(function(e) {
     e.preventDefault();
     let startQuizLink = $(this).attr('data-url');
     executeRocket(function() {
-      console.log("callback", startQuizLink);
       window.location.href = startQuizLink;
     });
   });
@@ -89,27 +84,8 @@ $(function() {
     }
     );
   });
-  //styling and popout menu------------------
 
-
-  $(function() {
-    $(".share_btn").dialog();
-  });
-
-
-
-  // $('primary-btn share').click(function (e) {
-  //   e.preventDefault();
-  //   navigator.clipboard.writeText("href").then(function() {
-  //     /* clipboard successfully set */
-  //   }, function() {
-  //     /* clipboard write failed */
-  //   });
-  //   $('primary-btn share').addClass('share1');
-  // })
-
-  /* =========Trying out the API things====== */
-
+  //for styling
   //background animation
 
   const colors = ["#3CC157", "#2AA7FF", "#1B1B1B", "#FCBC0F", "#F85F36"];
@@ -139,20 +115,6 @@ $(function() {
       y: Math.random() * 12
     };
 
-    let anim = el.animate(
-      [
-        { transform: "translate(0, 0)" },
-        { transform: `translate(${to.x}rem, ${to.y}rem)` }
-      ],
-      {
-        duration: (Math.random() + 1) * 2000, // random duration
-        direction: "alternate",
-        fill: "both",
-        iterations: Infinity,
-        easing: "ease-in-out"
-      }
-    );
-  });
 
   //confetti
   console.log('confetti-------', window.confetti);
@@ -175,6 +137,9 @@ $(function() {
     if (elPosition !== "relative" || elPosition !== "absolute") {
       this.el.style.position = "relative";
     }
+  }, 25);
+};
+window.confettiful = new Confettiful(document.querySelector(".mainQuizResultContainer"));
 
     containerEl.classList.add("confetti-container");
 
@@ -218,8 +183,6 @@ $(function() {
   };
 
   window.confettiful = new Confettiful(document.querySelector(".mainQuizResultContainer"));
-
-
 });
 
 
