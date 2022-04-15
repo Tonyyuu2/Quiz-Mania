@@ -6,31 +6,26 @@ const generateRandomString = () => {
 const getQuiz = (db, id) => {
 
   return db.query(`SELECT * FROM quizzes WHERE quizzes.id = $1;`, [id]).then(result => {
-    return (result.rows[0]); //render the appropriate quiz given the quiz id
-  })
-
-    .catch(err => {
-      console.log(err);
-    });
+    return (result.rows[0]);
+  }).catch(err => {
+    console.log(err);
+  });
 };
-exports.getQuiz = getQuiz;
+
 
 const getQuizIdFromURL = async function(db, url) {
-
   const id = await db.query(`SELECT id FROM quizzes WHERE quizzes.url = $1`, [url]);
   return id;
-
 };
 
-const getQuizFromUserURL = async (db, url) => { // function that renders the quiz with a user URL
+const getQuizFromUserURL = async (db, url) => {
   const qidPromise = await getQuizIdFromURL(db, url);
   const quizidFromURL = qidPromise.rows[0].id;
 
-  return db.query(`SELECT quizzes.title, quizzes.description, quizzes.id as quizId, 
+  return db.query(`SELECT quizzes.public, quizzes.title, quizzes.description, quizzes.id as quizId, 
     questions.id as questionId FROM quizzes 
     JOIN questions ON questions.quiz_id = quizzes.id
     WHERE quizzes.id = $1`, [quizidFromURL]).then(result => {
-    console.log(result.rows[0]);
     return (result.rows[0]);
   })
     .catch(err => {
@@ -39,7 +34,7 @@ const getQuizFromUserURL = async (db, url) => { // function that renders the qui
 
 
 };
-exports.getQuizFromUserURL = getQuizFromUserURL;
+
 
 const addQuiz = (db, input) => {
 
@@ -53,7 +48,7 @@ const addQuiz = (db, input) => {
       console.log(err.message);
     });
 };
-exports.addQuiz = addQuiz;
+
 
 const addQuestion = (db, input, quizId) => {
 
@@ -66,7 +61,7 @@ const addQuestion = (db, input, quizId) => {
       console.log(err);
     });
 };
-exports.addQuestion = addQuestion;
+
 
 const getQuizRandomURL = (db, id) => {
 
@@ -77,9 +72,9 @@ const getQuizRandomURL = (db, id) => {
   }
   );
 };
-exports.getQuizRandomURL = getQuizRandomURL;
 
-const getAllResults = (db, id) => { // function that renders the results of a particular quiz
+
+const getAllResults = (db, id) => {
 
   return db.query(`SELECT * FROM quiz_results JOIN users ON users.id = user_id JOIN quizzes ON quizzes.id = quiz_id WHERE quiz_results.id = $1`, [id]).then(result => {
     return (result.rows[0]);
@@ -87,45 +82,44 @@ const getAllResults = (db, id) => { // function that renders the results of a pa
     console.log(err);
   });
 };
-exports.getAllResults = getAllResults;
 
-const getMyAttempts = (db, id) => { // function that renders all the results of a particular user
 
-  return db.query(`SELECT quizzes.title, quiz_results.user_score,quiz_results.total_score, to_char( quiz_results.date,'Day Mon dd, yyyy HH12:MI AM') as date FROM quiz_results JOIN quizzes ON quizzes.id = quiz_id JOIN users ON users.id = quiz_results.user_id WHERE users.id = $1 ORDER BY date DESC`, [id]).then(result => {
+const getMyAttempts = (db, id) => {
+
+  return db.query(`SELECT quizzes.title, quizzes.url, quiz_results.user_score,quiz_results.total_score, to_char( quiz_results.date,'Day Mon dd, yyyy HH12:MI AM') as date FROM quiz_results JOIN quizzes ON quizzes.id = quiz_id JOIN users ON users.id = quiz_results.user_id WHERE users.id = $1 ORDER BY date DESC`, [id]).then(result => {
     return (result.rows); //
   }).catch(err => {
     console.log(err);
   });
 };
-exports.getMyAttempts = getMyAttempts;
 
-const addTestResult = (db) => { //need to refactor
+
+const addTestResult = (db) => {
   return db.query(`INSERT INTO quiz_results (user_id, quiz_id, user_score, total_score, date, result_url) VALUES ($1, $2, $3, $4, $5, $6) RETURNING *`, []).then(result => {
     return (result.rows[0].user_id);
   }).catch(err => {
     console.log(err);
   });
 };
-exports.addTestResult = addTestResult;
+
 
 const getQuizData = (db, id) => {
 
-  return db.query(`SELECT questions.* FROM questions 
+  return db.query(`SELECT questions.* FROM questions
     JOIN quizzes ON quiz_id = quizzes.id
     WHERE quizzes.id = $1`, [id])
     .then(result => {
       result.rows[0]['quizID'] = id;
-      /*   console.log("--------------", result.rows, id); */
       return result.rows[0];
     })
     .catch(err => console.log(err));
 
 };
 
-exports.getQuizData = getQuizData;
+
 
 const checkAnswer = (db, userInput, quizId, questionId) => {
-  return db.query(`SELECT answer FROM questions 
+  return db.query(`SELECT answer FROM questions
     JOIN quizzes ON quiz_id = quizzes.id
     WHERE quizzes.id = $1
     AND questions.id= $2`, [quizId, questionId])
@@ -142,7 +136,7 @@ const checkAnswer = (db, userInput, quizId, questionId) => {
 
 };
 
-exports.checkAnswer = checkAnswer;
+
 
 const lastQuestionId = async (db, quizId) => {
   const lastQId = await db.query(`SELECT id FROM questions WHERE quiz_id = $1 ORDER BY id DESC`, [quizId]);
@@ -152,21 +146,19 @@ const lastQuestionId = async (db, quizId) => {
 
 const getNextQuestion = async (db, quizId, questionId) => {
   const lastQIdP = await lastQuestionId(db, quizId);
-  console.log('lastQIdP :', lastQIdP);
   const maxQId = lastQIdP.rows[0].id;
 
-  return db.query(`SELECT questions.* FROM questions 
+  return db.query(`SELECT questions.* FROM questions
     JOIN quizzes ON quiz_id = quizzes.id
     WHERE quizzes.id = $1
     AND questions.id= $2`, [quizId, questionId])
     .then(result => {
       result.rows[0]['maxId'] = maxQId;
-      console.log('-------', result.rows[0]);
       return result.rows[0];
     })
     .catch(err => console.log(err));
 };
-exports.getNextQuestion = getNextQuestion;
+
 
 
 
@@ -176,14 +168,13 @@ const insertUserAttempt = (db, quizId, questionId, isTrue) => {
     VALUES ($1, $2, $3, $4)
     ON CONFLICT(question_id) DO UPDATE SET is_true = EXCLUDED.is_true RETURNING*;`, [1, quizId, questionId, isTrue])
     .then(result => {
-      console.log(result.rows[0]);
       return result.rows[0];
     })
     .catch(err => console.log(err));
 
 };
 
-exports.insertUserAttempt = insertUserAttempt;
+
 
 const getTotalQuestion = async (db, quizId) => {
   const data = await db.query(`SELECT COUNT(question_id) as total FROM quiz_attempts
@@ -191,7 +182,7 @@ const getTotalQuestion = async (db, quizId) => {
     GROUP BY quiz_id ;`, [quizId]);
   return data;
 };
-  
+
 const resultData = async (db, quizId) => {
 
 
@@ -210,15 +201,12 @@ const getQuizResult = async (db, quizId) => {
   return db.query(`INSERT INTO quiz_results(user_id, quiz_id, user_score, total_score, result_url) VALUES($1, $2, $3, $4, $5) RETURNING *; `, [1, quizId, userscore, totalScore, generateRandomString()])
     .then(result => {
       result.rows[0].title = title;
-      console.log(result.rows[0]);
       return result.rows[0];
     })
     .catch(err => console.log(err));
 
 };
-exports.getQuizResult = getQuizResult;
 
-exports.getQuizResult = getQuizResult;
 
 const addRandomQuiz = (db, data) => {
 
@@ -229,7 +217,7 @@ const addRandomQuiz = (db, data) => {
 
 };
 
-exports.addRandomQuiz = addRandomQuiz;
+
 
 
 const randomHelper = async (db, quizId, questionData) => {
@@ -246,15 +234,57 @@ const addRandomQuestions = async (db, quizId, apiData) => {
   return ("done");
 };
 
-exports.addRandomQuestions = addRandomQuestions;
+
 
 const getUserQuizResult = (db, quizURL) => {
 
   return db.query(`SELECT * FROM quiz_results JOIN quizzes ON quiz_id = quizzes.id JOIN users ON users.id = quiz_results.user_id WHERE result_url = $1;`, [quizURL]).then(result => {
-    console.log('result.rows[0] :', result.rows[0]);
     return result.rows[0];
   })
-  .catch(err => console.log(err));
+    .catch(err => console.log(err));
 };
-exports.getUserQuizResult = getUserQuizResult;
+
+
+const updateQuizInfo = (db, quizId, data) => {
+  return db.query(`UPDATE quizzes SET public = $1, description = $2, title=$3 WHERE id= $4 RETURNING*;`, [data.is_public, data.quiz_description, data.quiz_title, quizId])
+    .then(result => result)
+    .catch(e => console.log(e));
+};
+
+const getUserQuizzes = async (db) => {
+
+  const userQuizData = await db.query(`SELECT * FROM quizzes JOIN users ON users.id = user_id WHERE users.id = $1 AND quizzes.description NOT LIKE '%Random generated%' AND quizzes.public = 'TRUE' GROUP BY users.id, quizzes.id HAVING quizzes.id > 3 ORDER BY quizzes.id DESC;`, [1]);
+
+  return userQuizData;
+};
+
+const getFeaturedQuizzes = async (db) => {
+
+  const featuredQuizData = await db.query(`SELECT * FROM quizzes JOIN users ON users.id = user_id WHERE users.id = $1 GROUP BY users.id, quizzes.id HAVING quizzes.id < 4 ORDER BY quizzes.id DESC`, [1]);
+
+  return featuredQuizData;
+};
+
+const getRandomQuizzes = async (db) => {
+
+  const randomQuizData = await db.query(`SELECT * FROM quizzes WHERE quizzes.description = 'Random generated quiz' ORDER BY quizzes.id DESC;`);
+
+  return randomQuizData;
+};
+
+const threeColumnQuizzes = async (db) => {
+  const userQuiz = await getUserQuizzes(db);
+  const userQuizzes = userQuiz.rows;
+
+  const featuredQuiz = await getFeaturedQuizzes(db);
+  const featuredQuizzes = featuredQuiz.rows;
+
+  const randomQuiz = await getRandomQuizzes(db);
+  const randomQuizzes = randomQuiz.rows;
+
+  return { userQuizzes, featuredQuizzes, randomQuizzes };
+};
+
+
+module.exports = { updateQuizInfo, getMyAttempts, getQuizResult, getQuizFromUserURL, getUserQuizResult, addRandomQuestions, addRandomQuiz, insertUserAttempt, getNextQuestion, getQuizData, checkAnswer, addTestResult, getQuiz, addQuiz, addQuestion, getQuizRandomURL, getAllResults, threeColumnQuizzes };
 

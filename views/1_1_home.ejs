@@ -16,7 +16,7 @@
 
     <div class="user_name nav-margin">
       <div class="welcome">Welcome</div>
-      <div class="user_name1">Johnny Smith</div>
+      <div class="user_name1"><%= userQuizzes[0].name %></div>
     </div>
 
 
@@ -40,8 +40,10 @@
           <i class="fa-solid fa-user" id="userIcon"></i>
           <p class="quiz_header">My Quizzes</p>
         </div>
-        <% for(const quiz of quizzes) { %>
-        <div class="quiz_card text-center">
+        <% for(const quiz of userQuizzes) { %>
+          <div
+          class="<%= quiz.public ? 'quiz_card': 'quiz_card_private' %> text-center"
+        >
           <h4><%=quiz.title%></h4>
           <h5><%=quiz.description%></h5>
           <a class="primary-btn" href="/quizzes/u/<%=quiz.url%>">Attempt</a>
@@ -54,8 +56,10 @@
           <i class="fa-solid fa-shuffle"></i>
           <p class="quiz_header">Generated Quizzes</p>
         </div>
-        <% for(const quiz of quizzes) { %>
-        <div class="quiz_card text-center">
+        <% for(const quiz of randomQuizzes) { %>
+        <div
+          class="<%= quiz.public ? 'quiz_card': 'quiz_card_private' %> text-center"
+        >
           <h4><%=quiz.title%></h4>
           <h5><%=quiz.description%></h5>
           <a class="primary-btn" href="/quizzes/u/<%=quiz.url%>">Attempt</a>
@@ -67,7 +71,7 @@
           <i class="fa-solid fa-star" id="star"></i>
           <p class="quiz_header">Featured Quizzes</p>
         </div>
-        <% for(const quiz of quizzes) { %>
+        <% for(const quiz of featuredQuizzes) { %>
         <div class="quiz_card text-center">
           <h4><%=quiz.title%></h4>
           <h5><%=quiz.description%></h5>
