@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>QuizMania - Edit My Quizzes</title>
+    <link rel="stylesheet" href="/styles/quiz.css" type="text/css" />
+  </head>
+
+  <body>
+    <%- include('partials/_header') %>
+    <form method="POST" action="/quizzes/<%= quizid %>/edit ">
+      <div class="create_quiz_container flex-column nav-margin">
+        <h1 class="header_text">Edit Quiz Info</h1>
+        <label class="label">Enter Quiz Title:</label>
+        <input
+          class="input"
+          type="text"
+          value="<%=title%>"
+          name="quiz_title"
+          required
+        />
+        <label class="label">Enter Description:</label>
+        <input
+          class="input"
+          type="text"
+          value="<%=description%>"
+          name="quiz_description"
+          required
+        />
+        <div class="visibility_option">
+          <label>Visible to Public:</label>
+          <% if(public){ %>
+          <input
+            id="radioinput"
+            type="radio"
+            value="true"
+            name="is_public"
+            checked="checked"
+          />
+          <label for="yes">Yes</label>
+          <input id="radioinput" type="radio" value="false" name="is_public" />
+          <label for="no">No</label>
+          <%}else{%>
+          <input id="radioinput" type="radio" value="true" name="is_public" />
+          <label for="yes">Yes</label>
+          <input
+            id="radioinput"
+            type="radio"
+            value="false"
+            name="is_public"
+            checked="checked"
+          />
+          <label for="no">No</label>
+
+          <%} %>
+        </div>
+        <button class="primary-btn" type="submit">Submit</button>
+      </div>
+    </form>
+    <%- include('partials/_footer') %>
+  </body>
+</html>

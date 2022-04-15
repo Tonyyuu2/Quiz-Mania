@@ -13,7 +13,8 @@
         <h1 class="order">#<%= index %></h1>
         <div class="quiz_info flex-row">
           <div class="quiz_title">
-            <i class="fa-solid fa-book"></i><%= result.title %>
+            <i class="fa-solid fa-book"></i>
+            <a href="/quizzes/u/<%= result.url %> "><%= result.title %></a>
           </div>
           <div class="quiz_score">
             <i class="fa-solid fa-award"></i> <%= result.user_score %> / <%=

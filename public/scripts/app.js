@@ -34,10 +34,7 @@ $(function() {
       url: `/quiz-attempts/${qid}/questions/${queid}/check`,
       data: { 'option': userInput }
     }).then(function(result) {
-      console.log("From get request", qid, queid, result.isTrue);
       addAttmept(qid, queid, result.isTrue);
-      console.log(result);
-
       if (result.isTrue) {
         $selectedOption.parent().css("background-color", "#97DBAE");
       } else {
@@ -107,8 +104,4 @@ $(function() {
 
 });
 
-
-
-
-// });
 
