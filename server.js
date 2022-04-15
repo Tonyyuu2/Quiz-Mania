@@ -1,7 +1,7 @@
-// load .env data into process.env
+
 require("dotenv").config();
 
-// Web server config
+
 const PORT = process.env.PORT || 8080;
 const sassMiddleware = require("./lib/sass-middleware");
 const express = require("express");
@@ -10,11 +10,12 @@ const morgan = require("morgan");
 const cookieSession = require('cookie-session');
 const bodyParser = require("body-parser");
 
-// PG database client/connection setup
+
 const { Pool } = require("pg");
 const dbParams = require("./lib/db.js");
 const db = new Pool(dbParams);
 db.connect();
+
 
 // loading packages
 app.use(morgan("dev"));
@@ -31,7 +32,7 @@ app.use(
   sassMiddleware({
     source: __dirname + "/styles",
     destination: __dirname + "/public/styles",
-    isSass: false, // false => scss, true => sass
+    isSass: false,
   })
 );
 
@@ -44,12 +45,14 @@ const myAttempts = require("./routes/my_attempts");
 const quizAttempts = require("./routes/quiz-attempts");
 const { threeColumnQuizzes } = require("./db/database_helper_functions");
 
+
 // Mount all resource routes
 app.use("/quizzes", quizzesRoutes(db));
 app.use("/questions", questionsRoutes(db));
 app.use("/results", resultsRoutes(db));
 app.use("/my_attempts", myAttempts(db));
 app.use("/quiz-attempts", quizAttempts(db));
+
 
 // Home page
 app.get("/", (req, res) => {
