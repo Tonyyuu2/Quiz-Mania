@@ -7,19 +7,19 @@
     border-radius: 1rem;
     background-image: linear-gradient(
       to right top,
-      #d0c4ed,
-      #dcafeb,
-      #fbc2eb,
-      #f5bee8,
-      #f9e4f6
+      #E1F0FA,
+      #C6E1F2,
+      #A9D1EA,
+      #84a9f9,
+      #94d9fe
     );
-    padding: 1em 10em 3em;
+    padding: 2px 5em 20px;
   }
 
   &_card_private {
     margin: 1rem;
     border-radius: 1rem;
-    padding: 1em 10em 3em;
+    padding: 2px 5em 20px;
     background-image: linear-gradient(315deg, #f39f86 0%, #f9d976 74%);
   }
 
@@ -34,14 +34,68 @@
   }
 }
 
+
+
+.homeHeadingContainer {
+  display: flex;
+  justify-content: column;
+  align-items:center;
+  width: 100%;
+  overflow: hidden;
+  position: relative;
+}
+
+.ball {
+  position: absolute;
+  border-radius: 100%;
+  opacity: 0.4;
+  height: 10%;
+  z-index: -1;
+}
 .nav-margin {
   align-items: center;
 }
 
-.user_name1 {
-  padding-left: 5px;
-  animation: revealText 1s forwards;
-  animation-delay: 0.4s;
+.randomQuizContainer {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  justify-content:space-evenly;
+  margin-left: 35%;
+  margin-right: 35%;
+  margin-bottom: 40px;
+  margin-top: 20px;
+}
+
+// .randomHeading {
+//   margin: auto;
+//   overflow: hidden;
+//   position: relative;
+// }
+
+.randomHeading1 {
+  margin: auto;
+  color: #333;
+  font-family: tahoma;
+  font-size: 3rem;
+  font-weight: 100;
+  line-height: 1.5;
+  text-transform: uppercase;
+  white-space: nowrap;
+  overflow: hidden;
+  position: relative;
+  width: 550px;
+}
+
+
+.generator {
+  margin-top: 20px;
+  box-shadow: 0 9px rgb(123, 123, 123);
+}
+
+.generator:active {
+  box-shadow: 0 5px #666;
+  transform: translateY(4px);
 }
 
 .user_name {
@@ -53,7 +107,40 @@
   display: block;
   opacity: 0;
   animation: revealText 1s forwards;
-  animation-delay: 0.4s;
+  // animation-delay: 0.4s;
+}
+
+.welcome {
+  float: left;
+  padding: 5px;
+  // animation-name: revealText;
+}
+
+.user_name1 {
+  padding-left: 5px;
+  color: #72ccfc;
+  animation: revealText2 4s forwards;
+  animation-delay: 0.1s;
+}
+
+@keyframes revealText {
+  from {
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@keyframes revealText2 {
+  from {
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
 }
 
 .create_quiz_container {
@@ -95,14 +182,24 @@
   padding: 5px;
 }
 
-.user_name1 {
-  color: rgb(250, 138, 157);
-  animation: revealText2 4s forwards;
-  animation-delay: 0.1s;
+i {
+  float: left;
+  padding-right: 10px;
 }
 
+<<<<<<< HEAD
 .edit-quiz {
   justify-content: space-between;
   align-items: center;
   padding: 1.5rem;
 }
+=======
+#star {
+  color: rgb(237, 237, 5);
+}
+
+#userIcon {
+  color: #72ccfc;
+}
+
+>>>>>>> 6c82c4e6a4e614c46c8abf8e59c549c36a7404ec

@@ -42,6 +42,7 @@ const questionsRoutes = require("./routes/questions");
 const resultsRoutes = require("./routes/results");
 const myAttempts = require("./routes/my_attempts");
 const quizAttempts = require("./routes/quiz-attempts");
+const { threeColumnQuizzes } = require("./db/database_helper_functions");
 
 
 app.use("/quizzes", quizzesRoutes(db));
@@ -52,9 +53,13 @@ app.use("/quiz-attempts", quizAttempts(db));
 
 
 app.get("/", (req, res) => {
-  db.query(`SELECT * FROM quizzes ORDER BY id DESC`).then(result => {
-    res.render("1_1_home", { quizzes: result.rows });
-  });
+  threeColumnQuizzes(db).then(result => {
+  console.log('result------------- :', result);
+    res.render("1_1_home", result)
+  })
+  .catch(err => {
+    console.log(err)
+  })
 });
 
 app.listen(PORT, () => {
